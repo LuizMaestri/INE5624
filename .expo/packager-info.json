@@ -1,5 +1,8 @@
 {
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 52885
+  "packagerPid": 13188,
+  "expoServerNgrokUrl": "https://zf-wax.luizmaestri.ine5624.exp.direct",
+  "packagerNgrokUrl": "https://packager.zf-wax.luizmaestri.ine5624.exp.direct",
+  "ngrokPid": 17512
 }
