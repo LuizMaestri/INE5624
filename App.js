@@ -1,6 +1,9 @@
 import Expo from 'expo';
 import React, { Component } from 'react';
+import { StyleProvider } from 'native-base'; 
 import Application from './restaguru/components/Application';
+import getTheme from './restaguru/theme/components';
+import platform from './restaguru/theme/variables/platform';
 
 export default class App extends Component {
   constructor() {
@@ -26,7 +29,9 @@ export default class App extends Component {
       return <Expo.AppLoading />;
     }
     return (
-      <Application/>
+      <StyleProvider  style={getTheme(platform)}>
+        <Application/>
+      </StyleProvider>
     );
   }
 }
