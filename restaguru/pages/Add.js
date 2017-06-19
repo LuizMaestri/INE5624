@@ -99,8 +99,8 @@ export default class Add extends Component {
                 <SliderGrade value={ this.rating.atmosphere } name={ 'Atmosphere' } minimumTrackTintColor='#30a935' { ...styles.foodSlider } onValueChange={ this.handlerAtmosphere }/>
                 <SliderGrade value={ this.rating.price } name={ 'Price' } minimumTrackTintColor='#30a935' { ...styles.foodSlider } onValueChange={ this.handlerPrice }/>
                 <SliderGrade value={ this.rating.satisfaction } name={ 'Satisfaction' } minimumTrackTintColor='#30a935' { ...styles.foodSlider } onValueChange={ this.handlerSatisfaction }/>
-                <LabelInput label={ 'Comments' } onChangeText={ this.handlerComment }/>
-                <LabelInput label={ 'Private Comments' } onChangeText={ this.handlerPrivateComment }/>
+                <LabelInput label={ 'Comments' } onChangeText={ this.handlerComment } multiline={ true }/>
+                <LabelInput label={ 'Private Comments' } onChangeText={ this.handlerPrivateComment } multiline={ true }/>
                 <Button full success onPress={ this.handlerSubmit }>
                     <Text>Save</Text>
                 </Button>
