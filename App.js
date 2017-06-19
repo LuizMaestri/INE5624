@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { StyleProvider } from 'native-base'; 
 import Application from './restaguru/components/Application';
 import getTheme from './restaguru/theme/components';
-import platform from './restaguru/theme/variables/platform';
 
 export default class App extends Component {
   constructor() {
@@ -12,7 +11,14 @@ export default class App extends Component {
     this.state = {
       isLoading: false,
       isReady: false,
+      theme: require('./restaguru/theme/variables/restaguru').default
     };
+    this.changeTheme = this.changeTheme.bind(this);
+  }
+
+  changeTheme(theme){
+    console.log(this);
+    this.setState({ theme });
   }
 
   async componentWillMount() {
@@ -24,13 +30,15 @@ export default class App extends Component {
 
     this.setState({isReady: true});
   }
+
   render() {
     if (!this.state.isReady) {
       return <Expo.AppLoading />;
     }
+    {}
     return (
-      <StyleProvider  style={getTheme(platform)}>
-        <Application/>
+      <StyleProvider style={getTheme(this.state.theme)}>
+        <Application onChangeTheme={ this.changeTheme } theme={this.state.theme}/>
       </StyleProvider>
     );
   }

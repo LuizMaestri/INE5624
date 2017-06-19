@@ -35,17 +35,17 @@ export default {
   CheckboxIconMarginTop: platform === "ios" ? undefined : 1,
   CheckboxFontSize: platform === "ios" ? 23 / 0.9 : 18,
   DefaultFontSize: 17,
-  checkboxBgColor: "#039BE5",
+  checkboxBgColor: "#f26b38",
   checkboxSize: 20,
   checkboxTickColor: "#fff",
 
   // Segment
-  segmentBackgroundColor: "#3F51B5",
-  segmentActiveBackgroundColor: "#fff",
-  segmentTextColor: "#fff",
-  segmentActiveTextColor: "#3F51B5",
-  segmentBorderColor: "#fff",
-  segmentBorderColorMain: "#3F51B5",
+  segmentBackgroundColor: platform === "ios" ? "#F8F8F8" : "#3F51B5",
+  segmentActiveBackgroundColor: platform === "ios" ? "#007aff" : "#fff",
+  segmentTextColor: platform === "ios" ? "#007aff" : "#fff",
+  segmentActiveTextColor: platform === "ios" ? "#fff" : "#3F51B5",
+  segmentBorderColor: platform === "ios" ? "#007aff" : "#fff",
+  segmentBorderColorMain: platform === "ios" ? "#a7a6ab" : "#3F51B5",
 
   // New Variable
   get defaultTextColor() {
@@ -53,7 +53,7 @@ export default {
   },
 
   get btnPrimaryBg() {
-    return this.brandPrimary;
+    return "#f26b38"
   },
   get btnPrimaryColor() {
     return this.inverseTextColor;
@@ -108,7 +108,7 @@ export default {
   cardDefaultBg: "#fff",
 
   // Color
-  brandPrimary: "#2874F0",
+  brandPrimary: platform === "ios" ? "#007aff" : "#3F51B5",
   brandInfo: "#62B1F6",
   brandSuccess: "#5cb85c",
   brandDanger: "#d9534f",
@@ -131,36 +131,36 @@ export default {
 
   // Footer
   footerHeight: 55,
-  footerDefaultBg: "#2874F0",
+  footerDefaultBg:  "#f26b38",
 
   // FooterTab
-  tabBarTextColor: "#8bb3f4",
+  tabBarTextColor: platform === "ios" ? "#6b6b6b" : "#fff",
   tabBarTextSize: platform === "ios" ? 14 : 11,
   activeTab: platform === "ios" ? "#007aff" : "#fff",
   sTabBarActiveTextColor: "#007aff",
-  tabBarActiveTextColor: "#fff",
-  tabActiveBgColor: platform === "ios" ? "#1569f4" : undefined,
+  tabBarActiveTextColor: platform === "ios" ? "#007aff" : "#fff",
+  tabActiveBgColor: "#f26b38",
 
   // Tab
-  tabDefaultBg: "#2874F0",
-  topTabBarTextColor: "#b3c7f9",
-  topTabBarActiveTextColor: "#fff",
-  topTabActiveBgColor: platform === "ios" ? "#1569f4" : undefined,
-  topTabBarBorderColor: "#fff",
-  topTabBarActiveBorderColor: "#fff",
+  tabDefaultBg: platform === "ios" ? "#F8F8F8" : "#3F51B5",
+  topTabBarTextColor: platform === "ios" ? "#6b6b6b" : "#b3c7f9",
+  topTabBarActiveTextColor: platform === "ios" ? "#007aff" : "#fff",
+  topTabActiveBgColor: platform === "ios" ? "#cde1f9" : undefined,
+  topTabBarBorderColor: platform === "ios" ? "#a7a6ab" : "#fff",
+  topTabBarActiveBorderColor: platform === "ios" ? "#007aff" : "#fff",
 
   // Header
-  toolbarBtnColor: "#fff",
-  toolbarDefaultBg: "#2874F0",
+  toolbarBtnColor: platform === "ios" ? "#007aff" : "#fff",
+  toolbarDefaultBg: "#f26b38",
   toolbarHeight: platform === "ios" ? 64 : 56,
   toolbarIconSize: platform === "ios" ? 20 : 22,
   toolbarSearchIconSize: platform === "ios" ? 20 : 23,
   toolbarInputColor: platform === "ios" ? "#CECDD2" : "#fff",
   searchBarHeight: platform === "ios" ? 30 : 40,
   toolbarInverseBg: "#222",
-  toolbarTextColor: "#fff",
-  iosStatusbar: "light-content",
-  toolbarDefaultBorder: "#2874F0",
+  toolbarTextColor: platform === "ios" ? "#000" : "#fff",
+  toolbarDefaultBorder: platform === "ios" ? "#a7a6ab" : "#3F51B5",
+  iosStatusbar: platform === "ios" ? "dark-content" : "light-content",
   get statusBarColor() {
     return color(this.toolbarDefaultBg).darken(0.2).hex();
   },
@@ -221,7 +221,7 @@ export default {
 
   // Radio Button
   radioBtnSize: platform === "ios" ? 25 : 23,
-  radioSelectedColorAndroid: "#5067FF",
+  radioSelectedColorAndroid: "#3F51B5",
 
   // New Variable
   radioBtnLineHeight: platform === "ios" ? 29 : 24,
@@ -250,10 +250,10 @@ export default {
   titleFontfamily: platform === "ios" ? "System" : "Roboto_medium",
   titleFontSize: platform === "ios" ? 17 : 19,
   subTitleFontSize: platform === "ios" ? 12 : 14,
-  subtitleColor: "#FFF",
+  subtitleColor: platform === "ios" ? "#8e8e93" : "#FFF",
 
   // New Variable
-  titleFontColor: "#FFF",
+  titleFontColor: platform === "ios" ? "#000" : "#FFF",
 
   // Other
   borderRadiusBase: platform === "ios" ? 5 : 2,
