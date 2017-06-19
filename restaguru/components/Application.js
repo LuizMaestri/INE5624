@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Body, Button, Container, Content, Footer, FooterTab, Header, Icon, Left, Title } from 'native-base';
 import { Text } from 'react-native';
-import Home from '../pages/Home';
-import Add from '../pages/Add';
+import { Home, Add, Profile } from '../pages';
 import Restaurant from '../entities/Restaurant';
 
 export default class Application extends Component {
@@ -66,7 +65,7 @@ export default class Application extends Component {
           </Content>
           <Footer>
             <FooterTab>
-              <Button { ...(this.selectTab((<Home/>), 'profile')) }>
+              <Button { ...(this.selectTab((<Profile {...this.props}/>), 'profile')) }>
                 <Icon name="person"/>
               </Button>
               <Button { ...(this.selectTab((<Home { ...this.state.lists }/>), 'home')) }>
