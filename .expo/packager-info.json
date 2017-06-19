@@ -1,8 +1,8 @@
 {
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 17028,
-  "expoServerNgrokUrl": "https://zf-wax.luizmaestri.ine5624.exp.direct",
-  "packagerNgrokUrl": "https://packager.zf-wax.luizmaestri.ine5624.exp.direct",
-  "ngrokPid": 13576
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }

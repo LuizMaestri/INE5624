@@ -8,7 +8,7 @@ export default class LabelInput extends Component {
         return (
             <View style={ styles.container }>
                 <Text style={ { margin: 10 } }>{ this.props.label }</Text>
-                <BorderInput onChangeText={ this.props.onChangeText }/>
+                <BorderInput { ...this.props }/>
             </View>
         );
     }
