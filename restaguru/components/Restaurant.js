@@ -27,8 +27,8 @@ class RestaurantCard extends Component {
 
 export default class RestaurantList extends Component {
     render(){
-        let { filter, resturants } = this.props;
-        let cards = resturants.filter(
+        let { filter, restaurants } = this.props;
+        let cards = restaurants.filter(
             ( restaurant ) => {
                 return filter == '' || restaurant.name.toUpperCase().includes(filter.toUpperCase());
             }

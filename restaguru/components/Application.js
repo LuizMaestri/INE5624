@@ -9,7 +9,7 @@ export default class Application extends Component {
     super();
     this.state = {
       lists : {
-        resturants: [
+        restaurants: [
             new Restaurant('Miyoshi', 'a' , 1),
             new Restaurant('Gokoni', 'a' , 1)
         ],
@@ -34,11 +34,11 @@ export default class Application extends Component {
     };
   }
 
-  handlerAdd(resturant){
+  handlerAdd(restaurant){
     let { lists } = this.state;
-    let { resturants } = lists;
-    resturants.push(resturant);
-    lists.resturants = resturants;
+    let { restaurants } = lists;
+    restaurants.push(restaurant);
+    lists.restaurants = restaurants;
     this.setState({ lists });
     this.backHome();
   }
