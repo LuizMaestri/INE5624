@@ -1,12 +1,13 @@
 import Rating from './Rating';
 
 export default class Restaurant{
-    constructor(name='', address='', kind='', ratings=[]){
+    constructor(name='', address='', kind='', ratings=[], photos=[]){
         this.id = Restaurant.generateId();
         this.name = name;
         this.address = address;
         this.kind = kind;
         this.ratings = ratings;
+        this.photos = photos;
     }
 
     get price(){

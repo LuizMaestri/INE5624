@@ -13,11 +13,12 @@ export default class PhotoTaker extends Component {
     }
 
     picker() {
-        var options = {
-            title: 'Select Avatar',
+        const options = {
+            quality: 1.0,
+            maxWidth: 500,
+            maxHeight: 500,
             storageOptions: {
-                skipBackup: true,
-                path: 'images'
+                skipBackup: true
             }
         };
 
@@ -35,12 +36,13 @@ export default class PhotoTaker extends Component {
                 console.log('ImagePicker Error: ', response.error);
             }
             else {
-                // let source = { uri: response.uri };
-
+                // let photo = { uri: response.uri };
+                
                 // You can also display the image using data:
                 let photo = { uri: 'data:image/jpeg;base64,' + response.data };
 
                 this.setState({photo});
+                this.props.choosePhoto(photo);
             }
         });
     }
@@ -48,11 +50,11 @@ export default class PhotoTaker extends Component {
     render(){
         if(!this.state.photo){
             return (
-                <Button small onPress={ this.picker }>
+                <Button small onPress={ this.picker } style={ { margin: 10 } }>
                     <Icon name="camera"/>
                 </Button>
             );
         }
-        return (<Image source={ this.state.photo }/>);
+        return (<Image source={ this.state.photo } style={{width: 80, height: 80, margin: 10}}/>);
     }
 }
