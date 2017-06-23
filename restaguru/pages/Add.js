@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ScrollView, Text } from 'react-native';
-import { Button, Label } from 'native-base';
+import { Button, Label, Icon } from 'native-base';
 import BorderInput from '../components/BorderInput';
 import SliderGrade from '../components/SliderGrade';
 import PhotoSlider from '../components/PhotoSlider';
@@ -21,6 +21,7 @@ export default class Add extends Component {
         this.handlerComment = this.handlerComment.bind(this);
         this.handlerPrivateComment = this.handlerPrivateComment.bind(this);
         this.handlerSubmit = this.handlerSubmit.bind(this);
+        this.handlerChoosePhoto = this.handlerChoosePhoto.bind(this);
     }
 
     get rating(){
@@ -29,10 +30,20 @@ export default class Add extends Component {
     }
 
     set rating(rating){
-        let ratings = this.state.ratings
+        let { ratings } = this.state
         let tam = ratings.length;
         ratings[tam - 1] = rating;
-        this.setState({ratings});
+        this.setState({ ratings });
+    }
+
+    get photos(){
+        return this.state.photos;
+    }
+
+    set photos(photo){
+        let { photos } = this.state;
+        photos.push(photo);
+        this.setState({ photos });
     }
 
     handlerRestaurant(name){
@@ -83,8 +94,13 @@ export default class Add extends Component {
         this.rating = rating;
     }
 
+    handlerChoosePhoto(photo){
+        this.photos = photo
+        console.log(this.photos);
+    }
+
     handlerSubmit(){
-        this.props.onSumit(this.state);
+        this.props.onSubmit(this.state);
     }
 
     render(){
@@ -93,7 +109,7 @@ export default class Add extends Component {
                 <BorderInput placeholder={ 'Restaurant' } onChangeText={ this.handlerRestaurant }/>
                 <BorderInput placeholder={ 'Address' } onChangeText={ this.handlerAddress }/>
                 <BorderInput placeholder={ 'Kind' } onChangeText={ this.handlerKind }/>
-                <PhotoSlider/>
+                <PhotoSlider photos={ this.photos } choosePhoto={ this.handlerChoosePhoto }/>
                 <Label style={ { margin: 10 } }>Scores</Label>
                 <SliderGrade value={ this.rating.food } name={ 'Food' } minimumTrackTintColor='#30a935' { ...styles.foodSlider } onValueChange={ this.handlerFood }/>
                 <SliderGrade value={ this.rating.atmosphere } name={ 'Atmosphere' } minimumTrackTintColor='#30a935' { ...styles.foodSlider } onValueChange={ this.handlerAtmosphere }/>
