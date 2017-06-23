@@ -4,20 +4,26 @@ import { Container, Content, Card, CardItem, ListItem, List, Text, Thumbnail } f
 class RestaurantCard extends Component {
     render(){
         let { restaurant } = this.props;
+        let img;
+        if (restaurant.photos.length == 0){
+            img = require('../img/default.png');
+        } else {
+            img = restaurant.photos[0];
+        }
         return (
             <Card>
-                <CardItem header>
+                <CardItem header style={ { marginTop: -10, marginBottom: -10 } }>
                     <Text>
                         { restaurant.name }
                     </Text>
                 </CardItem>
-                <CardItem>
-                    <Thumbnail square source={require('../img/default.png')}/>
+                <CardItem style={ { marginTop: -10 } }>
+                    <Thumbnail square source={ img }/>
                     <Text>
-                        { restaurant.address }
+                        { restaurant.address + '\n' + restaurant.satisfaction }
                     </Text>
                     <Text>
-                        { restaurant.rating }
+                        
                     </Text>
                 </CardItem>
             </Card>
