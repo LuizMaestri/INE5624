@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { ScrollView } from 'react-native';
 import PhotoTaker from '../components/PhotoTaker';
 
 export default class PhotoSlider extends Component {
     render(){
         return (
-            <View style={ styles.slider }>
-                <PhotoTaker/>
-            </View>
+            <ScrollView style={ styles.slider } horizontal>
+                {
+                    [...this.props.photos, false].map(
+                        (photo, index) => (
+                            <PhotoTaker choosePhoto={ this.props.choosePhoto } key={ index }/>
+                        )
+                    )
+                }
+            </ScrollView>
         );
     }
 }
