@@ -1,12 +1,4 @@
-<<<<<<< HEAD
-{
-  "expo": {
-    "sdkVersion": "17.0.0"
-  }
-}
-=======
 {
   "name": "Restaguru",
   "displayName": "Restaguru"
 }
->>>>>>> remove_expo
