@@ -1,7 +1,8 @@
 import Rating from './Rating';
+import Address from './Address'
 
 export default class Restaurant{
-    constructor(name='', address='', kind='', ratings=[], photos=[]){
+    constructor(name='', address=new Address(), kind='', ratings=[], photos=[]){
         this.id = Restaurant.generateId();
         this.name = name;
         this.address = address;
@@ -40,6 +41,10 @@ export default class Restaurant{
         ).reduce(
             (a, b) => a + b, 0
         );
+    }
+
+    get addressStr() {
+        return this.address.city + ', ' + this.address.country;
     }
 
     static generateId(){

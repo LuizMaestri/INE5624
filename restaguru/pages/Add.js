@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text } from 'react-native';
+import { ScrollView } from 'react-native';
 import { Button, Label, Icon } from 'native-base';
 import BorderInput from '../components/BorderInput';
 import SliderGrade from '../components/SliderGrade';
@@ -96,7 +96,6 @@ export default class Add extends Component {
 
     handlerChoosePhoto(photo){
         this.photos = photo
-        console.log(this.photos);
     }
 
     handlerSubmit(){
@@ -118,7 +117,7 @@ export default class Add extends Component {
                 <LabelInput label={ 'Comments' } onChangeText={ this.handlerComment } multiline={ true }/>
                 <LabelInput label={ 'Private Comments' } onChangeText={ this.handlerPrivateComment } multiline={ true }/>
                 <Button full success onPress={ this.handlerSubmit }>
-                    <Text>Save</Text>
+                    <Label>Save</Label>
                 </Button>
             </ScrollView>
         );

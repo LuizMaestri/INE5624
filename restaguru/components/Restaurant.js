@@ -20,7 +20,7 @@ class RestaurantCard extends Component {
                 <CardItem style={ { marginTop: -10 } }>
                     <Thumbnail square source={ img }/>
                     <Text>
-                        { restaurant.address + '\n' + restaurant.satisfaction }
+                        { restaurant.addressStr + '\n' + restaurant.satisfaction }
                     </Text>
                     <Text>
                         
@@ -36,7 +36,21 @@ export default class RestaurantList extends Component {
         let { filter, restaurants } = this.props;
         let cards = restaurants.filter(
             ( restaurant ) => {
-                return filter == '' || restaurant.name.toUpperCase().includes(filter.toUpperCase());
+                let filtered = true;
+                if(filter.isEmpty()){
+                    return filtered;
+                }
+                filtered = filtered &&
+                    restaurant.name.toUpperCase().includes(filter.name.toUpperCase());
+                filtered = filtered &&
+                    restaurant.address.country.toUpperCase().includes(filter.country.toUpperCase());
+                filtered = filtered &&
+                    restaurant.address.city.toUpperCase().includes(filter.city.toUpperCase());
+                filtered = filtered && restaurant.satisfaction >= filter.satisfactionValue;
+                filtered = filtered && restaurant.food >= filter.foodValue;
+                filtered = filtered && restaurant.price >= filter.priceValue;
+                filtered = filtered && restaurant.atmosphere >= filter.atmosphereValue;
+                return filtered;
             }
         ).map(
             ( restaurant ) => {

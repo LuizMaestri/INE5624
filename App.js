@@ -15,7 +15,6 @@ export default class App extends Component {
   }
 
   changeTheme(theme){
-    console.log(this);
     this.setState({ theme });
   }
 

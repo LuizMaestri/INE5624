@@ -22,15 +22,10 @@ export default class PhotoTaker extends Component {
             }
         };
         ImagePicker.showImagePicker(options, (response) => {
-            console.log('Response = ', response);
-
-            if (response.didCancel) {
-                console.log('User cancelled image picker');
+            if (response.error) {
+                alert('ImagePicker Error: ', response.error);
             }
-            else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
-            }
-            else {
+            else if (!response.didCancel){
                 let photo = { uri: 'data:image/jpeg;base64,' + response.data };
 
                 this.setState({photo});

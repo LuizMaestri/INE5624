@@ -3,6 +3,7 @@ import { Body, Button, Container, Content, Footer, FooterTab, Header, Icon, Left
 import { Text } from 'react-native';
 import { Home, Add, Profile } from '../pages';
 import Restaurant from '../entities/Restaurant';
+import Address from '../entities/Address'
 
 export default class Application extends Component {
   constructor(){
@@ -10,10 +11,12 @@ export default class Application extends Component {
     this.state = {
       lists : {
         restaurants: [
-            new Restaurant('Miyoshi', 'a' , 1),
-            new Restaurant('Gokoni', 'a' , 1)
+            new Restaurant('Miyoshi', new Address('Brazil', 'Florianópolis') , 1),
+            new Restaurant('Gokoni', new Address('Brazil', 'São josé') , 1)
         ],
-        gurus: []
+        gurus: [],
+        //macGayver
+        navigate: (tab) =>  this.setState({ tab })
       },
       tab: null,
       tabName: 'home'
@@ -68,7 +71,7 @@ export default class Application extends Component {
               <Button { ...(this.selectTab((<Profile {...this.props}/>), 'profile')) }>
                 <Icon name="person"/>
               </Button>
-              <Button { ...(this.selectTab((<Home { ...this.state.lists }/>), 'home')) }>
+              <Button { ...(this.selectTab((<Home { ...this.state.lists } />), 'home')) }>
                 <Icon name="search"/>
               </Button>
               <Button { ...(this.selectTab((<Add onSubmit={ this.handlerAdd }/>), 'add')) }>
