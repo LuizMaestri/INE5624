@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Content, Card, CardItem, ListItem, List, Text, Thumbnail } from 'native-base';
+import { RestaurantPage } from '../pages';
 
 class RestaurantCard extends Component {
     render(){
@@ -12,12 +13,12 @@ class RestaurantCard extends Component {
         }
         return (
             <Card>
-                <CardItem header style={ { marginTop: -10, marginBottom: -10 } }>
+                <CardItem header style={ { marginTop: -10, marginBottom: -10 } } button onPress={this.props.onPress}>
                     <Text>
                         { restaurant.name }
                     </Text>
                 </CardItem>
-                <CardItem style={ { marginTop: -10 } }>
+                <CardItem style={ { marginTop: -10 } } button onPress={this.props.onPress}>
                     <Thumbnail square source={ img }/>
                     <Text>
                         { restaurant.addressStr + '\n' + restaurant.satisfaction }
@@ -56,7 +57,7 @@ export default class RestaurantList extends Component {
             ( restaurant ) => {
                 return (
                     <ListItem style={ styles.item }  key={ restaurant.id }>
-                        <RestaurantCard restaurant={ restaurant }/>
+                        <RestaurantCard restaurant={ restaurant } onPress={ () => this.props.navigate(<RestaurantPage { ...{ restaurant } } />) }/>
                     </ListItem>
                 );
             }

@@ -3,7 +3,7 @@ import { ScrollView } from 'react-native';
 import { Text } from 'native-base';
 import BorderInput from '../components/BorderInput';
 import ResultSearch from '../components/ResultSearch';
-import AdvanceSearch from './Search';
+import { AdvanceSearch } from './';
 import Filter from '../entities/Filter';
 
 export default class Home extends Component {
