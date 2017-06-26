@@ -34,9 +34,6 @@ const styles = {
         alignItems: 'center',
         padding: 10,
     },
-    link: {
-        borderBottomWidth: 1
-    },
     active: {
         color: 'green',
         background: 'red'
