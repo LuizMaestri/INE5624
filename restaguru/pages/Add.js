@@ -109,7 +109,7 @@ export default class Add extends Component {
                 <BorderInput placeholder={ 'Restaurant' } onChangeText={ this.handlerRestaurant }/>
                 <BorderInput placeholder={ 'Address' } onChangeText={ this.handlerAddress }/>
                 <BorderInput placeholder={ 'Kind' } onChangeText={ this.handlerKind }/>
-                <PhotoSlider photos={ this.photos } choosePhoto={ this.handlerChoosePhoto }/>
+                <PhotoSlider photos={ [...this.photos, false] } choosePhoto={ this.handlerChoosePhoto }/>
                 <Label style={ { margin: 10 } }>Scores</Label>
                 <SliderGrade value={ this.rating.food } name={ 'Food' } minimumTrackTintColor='#30a935' { ...styles.foodSlider } onValueChange={ this.handlerFood }/>
                 <SliderGrade value={ this.rating.atmosphere } name={ 'Atmosphere' } minimumTrackTintColor='#30a935' { ...styles.foodSlider } onValueChange={ this.handlerAtmosphere }/>

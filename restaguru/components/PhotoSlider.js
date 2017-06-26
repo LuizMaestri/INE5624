@@ -7,7 +7,7 @@ export default class PhotoSlider extends Component {
         return (
             <ScrollView style={ styles.slider } horizontal>
                 {
-                    [...this.props.photos, false].map(
+                    this.props.photos.map(
                         (photo, index) => (
                             <PhotoTaker choosePhoto={ this.props.choosePhoto } key={ index }/>
                         )
