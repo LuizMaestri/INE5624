@@ -4,8 +4,6 @@ import Address from './Address';
 import Filter from './Filter';
 import Rating from './Rating';
 
-console.log(Address)
-
 export { 
     Guru,
     Restaurant,
