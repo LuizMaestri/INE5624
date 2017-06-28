@@ -221,7 +221,7 @@ export default {
 
   // Radio Button
   radioBtnSize: platform === "ios" ? 25 : 23,
-  radioSelectedColorAndroid: "#3F51B5",
+  radioSelectedColorAndroid: "#f26b38",
 
   // New Variable
   radioBtnLineHeight: platform === "ios" ? 29 : 24,
