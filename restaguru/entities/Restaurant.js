@@ -1,5 +1,4 @@
-import Rating from './Rating';
-import Address from './Address'
+import { Address, Rating} from './'
 
 export default class Restaurant{
     constructor(name='', address=new Address(), kind='', ratings=[], photos=[]){

@@ -5,12 +5,12 @@ import BorderInput from '../components/BorderInput';
 import SliderGrade from '../components/SliderGrade';
 import PhotoSlider from '../components/PhotoSlider';
 import LabelInput from '../components/LabelInput';
-import Restaurant from '../entities/Restaurant';
+import { Restaurant } from '../entities';
 
 export default class Add extends Component {
     constructor(props){
         super(props);
-        this.state = Restaurant.factory(name=props.name);
+        this.state = Restaurant.factory(null, props.name);
         this.handlerRestaurant = this.handlerRestaurant.bind(this);
         this.handlerAddress = this.handlerAddress.bind(this);
         this.handlerKind = this.handlerKind.bind(this);
@@ -105,7 +105,7 @@ export default class Add extends Component {
     render(){
         return (
             <ScrollView>
-                <BorderInput placeholder={ 'Restaurant' } onChangeText={ this.handlerRestaurant }/>
+                <BorderInput placeholder={ 'Restaurant' } onChangeText={ this.handlerRestaurant } value={this.state.name}/>
                 <BorderInput placeholder={ 'Address' } onChangeText={ this.handlerAddress }/>
                 <BorderInput placeholder={ 'Kind' } onChangeText={ this.handlerKind }/>
                 <PhotoSlider photos={ [...this.photos, false] } choosePhoto={ this.handlerChoosePhoto }/>

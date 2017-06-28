@@ -65,8 +65,7 @@ export default class RestaurantList extends Component {
         } else {
             let name = filter.name.toUpperCase();
             cards = (
-                <ListItem style={ { ...styles.notFound, ...styles.item } }>
-                    {/* button onPress={ () => this.props.navigate(<Add onSubmit={ (element) => console.log(element) } name={ filter.name }/>) }>*/}
+                <ListItem style={ { ...styles.notFound, ...styles.item } } onPress={ () => this.props.navigate(<Add onSubmit={ (element) => console.log(element) } name={ filter.name }/>) }>
                     <Text uppercase={ false }>
                         "{name}" Not Found. Verify restaurant`s name on search or {'\n'} 
                         <Text style={ styles.linkAdd }>

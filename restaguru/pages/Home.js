@@ -4,7 +4,7 @@ import { Text } from 'native-base';
 import BorderInput from '../components/BorderInput';
 import ResultSearch from '../components/ResultSearch';
 import { AdvanceSearch } from './';
-import Filter from '../entities/Filter';
+import { Filter } from '../entities';
 
 export default class Home extends Component {
     constructor(props){
@@ -25,7 +25,7 @@ export default class Home extends Component {
         clearTimeout(this.interval);
         let { filter } = this.state;
         filter.name = name;
-        this.interval = setInterval(() => this.setState({ filter }), 200);
+        this.interval = setTimeout(() => this.setState({ filter }), 200);
     }
 
     advanced(){

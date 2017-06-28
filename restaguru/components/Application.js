@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Body, Button, Container, Content, Footer, FooterTab, Header, Icon, Left, Title } from 'native-base';
 import { Text } from 'react-native';
 import { Home, Add, Profile } from '../pages';
-import Restaurant from '../entities/Restaurant';
-import Address from '../entities/Address'
+import { Address, Restaurant } from '../entities';
 
 export default class Application extends Component {
   constructor(){
