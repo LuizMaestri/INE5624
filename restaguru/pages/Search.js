@@ -56,19 +56,19 @@ export default class AdvanceSearch extends Component {
         this.filter = filter;
     }
 
-    handlerAtmosphere() {
+    handlerAtmosphere(atmosphere) {
         let { filter } = this;
         filter.atmosphere.value = parseInt(atmosphere);
         this.filter = filter;
     }
     
-    handlerFood() {
+    handlerFood(food) {
         let { filter } = this;
         filter.food.value = parseInt(food);
         this.filter = filter;
     }
     
-    handlerSatisfaction() {
+    handlerSatisfaction(satisfaction) {
         let { filter } = this;
         filter.satisfaction.value = parseInt(satisfaction);
         this.filter = filter;
