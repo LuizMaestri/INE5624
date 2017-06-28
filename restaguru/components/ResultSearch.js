@@ -14,10 +14,10 @@ export default class ResultSearch extends Component {
                         <Container>
                             <Content>
                                 <View style={styles.nav}>
-                                    <Link to="/restaurants" active underlayColor='#f0f4f7' style={ styles.navItem } activeStyle={ styles.active }>
+                                    <Link to="/restaurants" style={ styles.navItem }>
                                         <Text style={ styles.link }>Restaurants</Text>
                                     </Link>
-                                    <Link to="/gurus" underlayColor='#f0f4f7' style={ styles.navItem }>
+                                    <Link to="/gurus"style={ styles.navItem } >
                                         <Text style={ styles.link }>Gurus</Text>
                                     </Link>
                                 </View>
@@ -44,10 +44,7 @@ const styles = {
         padding: 10,
     },
     link: {
-        borderBottomWidth: 1
-    },
-    active: {
-        color: 'green',
-        background: 'red'
+        borderBottomWidth: 1,
+        borderBottomColor: '#f26b38'
     }
 };
