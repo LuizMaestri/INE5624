@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Container, Content, Card, CardItem, ListItem, List, Text, Thumbnail } from 'native-base';
-import { RestaurantPage } from '../pages';
+import { Container, Content, Card, CardItem, Icon, ListItem, List, Text, Thumbnail } from 'native-base';
+import { RestaurantPage, Add } from '../pages';
 
 class RestaurantCard extends Component {
     render(){
@@ -18,13 +18,10 @@ class RestaurantCard extends Component {
                         { restaurant.name }
                     </Text>
                 </CardItem>
-                <CardItem style={ { marginTop: -10 } } button onPress={this.props.onPress}>
+                <CardItem style={ { marginTop: -10 } } >
                     <Thumbnail square source={ img }/>
                     <Text>
                         { restaurant.addressStr + '\n' + restaurant.satisfaction }
-                    </Text>
-                    <Text>
-                        
                     </Text>
                 </CardItem>
             </Card>
@@ -35,7 +32,7 @@ class RestaurantCard extends Component {
 export default class RestaurantList extends Component {
     render(){
         let { filter, restaurants } = this.props;
-        let cards = restaurants.filter(
+        let filteredRestaurants = restaurants.filter(
             ( restaurant ) => {
                 let filtered = true;
                 if(filter.isEmpty()){
@@ -53,15 +50,31 @@ export default class RestaurantList extends Component {
                 filtered = filtered && restaurant.atmosphere >= filter.atmosphereValue;
                 return filtered;
             }
-        ).map(
-            ( restaurant ) => {
-                return (
-                    <ListItem style={ styles.item }  key={ restaurant.id }>
-                        <RestaurantCard restaurant={ restaurant } onPress={ () => this.props.navigate(<RestaurantPage { ...{ restaurant } } />) }/>
-                    </ListItem>
-                );
-            }
-        );
+        )
+        let cards;
+        if (filteredRestaurants.length !== 0){
+            cards = filteredRestaurants.map(
+                ( restaurant ) => {
+                    return (
+                        <ListItem style={ styles.item }  key={ restaurant.id } onPress={ () => this.props.navigate(<RestaurantPage { ...{ restaurant } } />) }>
+                            <RestaurantCard restaurant={ restaurant } />
+                        </ListItem>
+                    );
+                }
+            );
+        } else {
+            cards = (
+                <ListItem style={ { ...styles.notFound, ...styles.item } } onPress={ () => console.log('Implement') }>
+                    <Text>"
+                        {filter.name.toUpperCase()} " Not Found.{'\n'} 
+                        <Text style={ styles.linkAdd }>
+                            Click here to Add <Icon style={ styles.linkAdd } name="add-circle"/>
+                        </Text>
+                    </Text>
+                </ListItem>
+            );
+
+        }
         return (
             <List>
                 { cards }
@@ -73,5 +86,13 @@ export default class RestaurantList extends Component {
 const styles = {
     item: {
         borderBottomWidth: 0
+    },
+    notFound: {
+        margin: 10,
+        width: '90%',
+        alignSelf: 'center'
+    },
+    linkAdd: {
+        color: '#f26b38'
     }
 };
