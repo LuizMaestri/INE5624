@@ -8,9 +8,9 @@ import LabelInput from '../components/LabelInput';
 import Restaurant from '../entities/Restaurant';
 
 export default class Add extends Component {
-    constructor(){
-        super();
-        this.state = Restaurant.factory()
+    constructor(props){
+        super(props);
+        this.state = Restaurant.factory(name=props.name);
         this.handlerRestaurant = this.handlerRestaurant.bind(this);
         this.handlerAddress = this.handlerAddress.bind(this);
         this.handlerKind = this.handlerKind.bind(this);
@@ -22,7 +22,7 @@ export default class Add extends Component {
         this.handlerPrivateComment = this.handlerPrivateComment.bind(this);
         this.handlerSubmit = this.handlerSubmit.bind(this);
         this.handlerChoosePhoto = this.handlerChoosePhoto.bind(this);
-    }
+    }  
 
     get rating(){
         let tam = this.state.ratings.length;

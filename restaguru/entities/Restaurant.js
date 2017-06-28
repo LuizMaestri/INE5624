@@ -53,8 +53,8 @@ export default class Restaurant{
         return thisId;
     }
 
-    static factory(user){
-        restaurant = new Restaurant();
+    static factory(user, name=''){
+        restaurant = new Restaurant(name);
         restaurant.ratings.push(new Rating(user));
         return restaurant;
     }

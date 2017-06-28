@@ -13,7 +13,7 @@ class RestaurantCard extends Component {
         }
         return (
             <Card>
-                <CardItem header style={ { marginTop: -10, marginBottom: -10 } } button onPress={this.props.onPress}>
+                <CardItem header style={ { marginTop: -10, marginBottom: -10 } }>
                     <Text>
                         { restaurant.name }
                     </Text>
@@ -63,14 +63,18 @@ export default class RestaurantList extends Component {
                 }
             );
         } else {
+            let name = filter.name.toUpperCase();
             cards = (
-                <ListItem style={ { ...styles.notFound, ...styles.item } } onPress={ () => console.log('Implement') }>
-                    <Text>"
-                        {filter.name.toUpperCase()} " Not Found.{'\n'} 
+                <ListItem style={ { ...styles.notFound, ...styles.item } }>
+                    {/* button onPress={ () => this.props.navigate(<Add onSubmit={ (element) => console.log(element) } name={ filter.name }/>) }>*/}
+                    <Text uppercase={ false }>
+                        "{name}" Not Found. Verify restaurant`s name on search or {'\n'} 
                         <Text style={ styles.linkAdd }>
-                            Click here to Add <Icon style={ styles.linkAdd } name="add-circle"/>
+                            Click here to Add { ' ' }
                         </Text>
+                        <Icon style={ styles.linkAdd } name="add-circle"/>
                     </Text>
+                    
                 </ListItem>
             );
 
@@ -88,11 +92,13 @@ const styles = {
         borderBottomWidth: 0
     },
     notFound: {
+        flex: 1,
         margin: 10,
         width: '90%',
         alignSelf: 'center'
     },
     linkAdd: {
-        color: '#f26b38'
+        color: '#f26b38',
+        fontSize: 20
     }
 };
