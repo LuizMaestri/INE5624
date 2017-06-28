@@ -6,11 +6,12 @@ import SliderGrade from '../components/SliderGrade';
 import PhotoSlider from '../components/PhotoSlider';
 import LabelInput from '../components/LabelInput';
 import { Restaurant } from '../entities';
+import { user } from '../Constants'
 
 export default class Add extends Component {
     constructor(props){
         super(props);
-        this.state = Restaurant.factory(null, props.name);
+        this.state = Restaurant.factory(user, props.name);
         this.handlerRestaurant = this.handlerRestaurant.bind(this);
         this.handlerAddress = this.handlerAddress.bind(this);
         this.handlerKind = this.handlerKind.bind(this);

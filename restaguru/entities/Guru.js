@@ -1,5 +1,5 @@
 export default class Guru{
-    constructor(name, address,age){
+    constructor(name, address, age){
         this.id = Guru.generateId();
         this.name = name;
         this.address = address;
