@@ -63,7 +63,7 @@ export default class RestaurantList extends Component {
                 }
             );
         } else {
-            let name = filter.name.toUpperCase();
+            let name = filter.name.toUpperCase().trim();
             cards = (
                 <ListItem style={ { ...styles.notFound, ...styles.item } } onPress={ () => this.props.navigate(<Add onSubmit={ (element) => console.log(element) } name={ filter.name }/>) }>
                     <Text uppercase={ false }>
