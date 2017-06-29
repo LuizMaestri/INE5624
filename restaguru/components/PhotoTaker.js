@@ -4,10 +4,10 @@ import { Button, Icon } from 'native-base';
 import ImagePicker from 'react-native-image-picker';
 
 export default class PhotoTaker extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
-            photo: null
+            photo: props.photo
         };
         this.picker = this.picker.bind(this);
     }

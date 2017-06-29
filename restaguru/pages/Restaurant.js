@@ -2,10 +2,16 @@ import React, { Component } from 'react';
 import { ScrollView, View } from 'react-native';
 import { Label, Text } from 'native-base';
 import BorderInput from '../components/BorderInput';
+import PhotoSlider from '../components/PhotoSlider';
+import { imageDefault } from '../Constants';
 
 export default class RestaurantPage extends Component {
     render(){
         let { restaurant } = this.props;
+        let { photos } = restaurant
+        if (photos.length === 0){
+            photos = [ imageDefault ];
+        }
         return (
             <ScrollView style={ styles.container }>
                 <Label>{ restaurant.name }</Label>
@@ -24,6 +30,7 @@ export default class RestaurantPage extends Component {
                         <Text >{ 'Food' }</Text>
                     </View>
                 </View>
+                <PhotoSlider { ...{ photos } }/>
             </ScrollView>
         );
     }

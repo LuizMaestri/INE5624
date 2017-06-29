@@ -9,7 +9,7 @@ export default class PhotoSlider extends Component {
                 {
                     this.props.photos.map(
                         (photo, index) => (
-                            <PhotoTaker choosePhoto={ this.props.choosePhoto } key={ index }/>
+                            <PhotoTaker choosePhoto={ this.props.choosePhoto } photo={ photo } key={ index }/>
                         )
                     )
                 }
