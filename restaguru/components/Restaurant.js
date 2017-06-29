@@ -16,6 +16,7 @@ import {
 import { RestaurantPage, Add } from '../pages';
 import { imageDefault } from '../Constants';
 import RatingList from '../components/Rating';
+import KnobGrade from './KnobGrade';
 
 class RestaurantCard extends Component {
     render(){
@@ -36,8 +37,11 @@ class RestaurantCard extends Component {
                 <CardItem style={ { marginTop: -10 } } >
                     <Thumbnail square source={ img }/>
                     <Text>
-                        { restaurant.addressStr + '\n' + restaurant.satisfaction }
+                        { '     '+ restaurant.addressStr }
                     </Text>
+                </CardItem>
+                <CardItem style={ { alignSelf: 'center' } }>
+                    <KnobGrade grade={ restaurant.satisfaction }/>
                 </CardItem>
             </Card>
         );
