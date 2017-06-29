@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Content, Text } from 'native-base';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { Link, NativeRouter, Route, Redirect } from 'react-router-native';
 import RestaurantList from './Restaurant';
 import GuruList from './Guru';
@@ -8,27 +8,23 @@ import GuruList from './Guru';
 export default class ResultSearch extends Component {
     render() {
         return (
-            <Container>
-                <Content>
-                    <NativeRouter>
-                        <Container>
-                            <Content>
-                                <View style={styles.nav}>
-                                    <Link to="/restaurants" style={ styles.navItem }>
-                                        <Text style={ styles.link }>Restaurants</Text>
-                                    </Link>
-                                    <Link to="/gurus"style={ styles.navItem } >
-                                        <Text style={ styles.link }>Gurus</Text>
-                                    </Link>
-                                </View>
-                                <Redirect from="/" to="/restaurants"/>
-                                <Route path="/restaurants" component={ () => <RestaurantList { ...this.props }/> }/>
-                                <Route path="/gurus" component={ () => (<GuruList { ...this.props }/>) }/>
-                            </Content>
-                        </Container>
-                    </NativeRouter>
-                </Content>
-            </Container>
+            <View>
+                <NativeRouter>
+                    <ScrollView>
+                        <View style={styles.nav}>
+                            <Link to="/restaurants" style={ styles.navItem }>
+                                <Text style={ styles.link }>Restaurants</Text>
+                            </Link>
+                            <Link to="/gurus"style={ styles.navItem } >
+                                <Text style={ styles.link }>Gurus</Text>
+                            </Link>
+                        </View>
+                        <Redirect from="/" to="/restaurants"/>
+                        <Route path="/restaurants" component={ () => <RestaurantList { ...this.props }/> }/>
+                        <Route path="/gurus" component={ () => (<GuruList { ...this.props }/>) }/>
+                    </ScrollView>
+                </NativeRouter>
+            </View>
         );
     }
 }
