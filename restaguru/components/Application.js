@@ -74,7 +74,7 @@ export default class Application extends Component {
               <Button { ...(this.selectTab((<Profile {...this.props}/>), 'profile')) }>
                 <Icon name="person"/>
               </Button>
-              <Button { ...(this.selectTab((<Home { ...this.state.lists } />), 'home')) }>
+              <Button { ...(this.selectTab((<Home onSubmit={ this.handlerAdd } { ...this.state.lists } />), 'home')) }>
                 <Icon name="search"/>
               </Button>
               <Button { ...(this.selectTab((<Add onSubmit={ this.handlerAdd }/>), 'add')) }>

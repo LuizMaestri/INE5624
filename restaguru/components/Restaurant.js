@@ -46,7 +46,7 @@ class RestaurantCard extends Component {
 
 export default class RestaurantList extends Component {
     render(){
-        let { filter, restaurants, navigate } = this.props;
+        let { filter, restaurants, navigate, onSubmit } = this.props;
         let filteredRestaurants = restaurants.filter(
             ( restaurant ) => {
                 let filtered = true;
@@ -80,7 +80,7 @@ export default class RestaurantList extends Component {
         } else {
             let name = filter.name.toUpperCase().trim();
             cards = (
-                <ListItem style={ { ...styles.notFound, ...styles.item } } onPress={ () => his.props.navigate(<Add onSubmit={ (element) => console.log(element) } name={ filter.name }/>) }>
+                <ListItem style={ { ...styles.notFound, ...styles.item } } onPress={ () => navigate(<Add onSubmit={ onSubmit } name={ filter.name }/>) }>
                     <Text uppercase={ false }>
                         "{name}" Not Found. Verify restaurant`s name on search or {'\n'} 
                         <Text style={ styles.linkAdd }>
