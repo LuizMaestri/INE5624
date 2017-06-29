@@ -8,7 +8,6 @@ class Rating extends Component {
         let { rating } = this.props;
         let { user } = rating;
         return (
-            <ListItem>
                 <Card>
                     <CardItem header>
                         <Text>
@@ -22,7 +21,6 @@ class Rating extends Component {
                         </Text>
                     </CardItem>
                 </Card>
-            </ListItem>
         );
     }
 }
@@ -30,9 +28,16 @@ class Rating extends Component {
 export default class RatingList extends Component {
     render() {
         let { ratings } = this.props
+        let cards = ratings.map(
+            (rating)=> (
+                <ListItem onPress={}>
+                    <Rating key={ rating.id } { ...{ rating } }/>
+                </ListItem>
+            )
+        );
         return (
             <List>
-                { ratings.map((rating)=> (<Rating key={ rating.id } { ...{ rating } }/>)) }
+                { cards }
             </List>
         );
     }
