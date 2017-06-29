@@ -3,6 +3,7 @@ import { ScrollView, View } from 'react-native';
 import { Icon, Label, Text, Thumbnail } from 'native-base';
 import { user as defaultUser, imageDefault } from '../Constants';
 import BreakLine from '../components/BreakLine';
+import KnobGrade from '../components/KnobGrade';
 
 class Comment extends Component {
     render(){
@@ -58,15 +59,15 @@ export default class RatingPage extends Component {
                 <BreakLine/>
                 <View style={ styles.nav }>
                     <View style={ styles.navItem }>
-                        <Text>{ rating.atmosphere }</Text>
+                        <KnobGrade grade={ rating.atmosphere } color={ '#f26b38' }/>
                         <Text>{ 'Atmosphere' }</Text>
                     </View>
                     <View style={ styles.navItem }>
-                        <Text>{ ' ' + rating.satisfaction }</Text>
+                        <KnobGrade grade={ rating.satisfaction } color={ '#f26b38' }/>
                         <Text>{ ' Satisfaction' }</Text>
                     </View>
                     <View style={ {...styles.navItem, marginLeft: -30, paddingLeft: 20} }>
-                        <Text>{ rating.food }</Text>
+                        <KnobGrade grade={ rating.food } color={ '#f26b38' }/>
                         <Text>{ 'Food' }</Text>
                     </View>
                 </View>

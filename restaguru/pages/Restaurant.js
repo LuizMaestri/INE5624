@@ -21,15 +21,15 @@ export default class RestaurantPage extends Component {
                 <BreakLine/>
                 <View style={ styles.nav }>
                     <View style={ styles.navItem }>
-                        <Text>{ restaurant.atmosphere }</Text>
+                        <KnobGrade grade={ restaurant.food } color={ '#f26b38' }/>
                         <Text>{ 'Atmosphere' }</Text>
                     </View>
                     <View style={ styles.navItem }>
-                        <Text>{ ' ' + restaurant.satisfaction }</Text>
+                        <KnobGrade grade={ restaurant.satisfaction } color={ '#f26b38' }/>
                         <Text>{ ' Satisfaction' }</Text>
                     </View>
                     <View style={ { ...styles.navItem, marginLeft: -30, paddingLeft: 20 } }>
-                        <Text>{ restaurant.food }</Text>
+                        <KnobGrade grade={ restaurant.food } color={ '#f26b38' }/>
                         <Text>{ 'Food' }</Text>
                     </View>
                 </View>

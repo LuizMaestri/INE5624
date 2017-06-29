@@ -41,7 +41,7 @@ class RestaurantCard extends Component {
                     </Text>
                 </CardItem>
                 <CardItem style={ { alignSelf: 'center' } }>
-                    <KnobGrade grade={ restaurant.satisfaction }/>
+                    <KnobGrade grade={ restaurant.satisfaction } color={ '#f26b38' }/>
                 </CardItem>
             </Card>
         );
