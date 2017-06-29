@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { List, ListItem, Card, CardItem, Text, Thumbnail } from 'native-base';
 import { imageDefault } from '../Constants';
+import { RatingPage } from '../pages';
 
 class Rating extends Component {
     render() {
@@ -27,11 +28,11 @@ class Rating extends Component {
 
 export default class RatingList extends Component {
     render() {
-        let { ratings } = this.props
+        let { ratings, navigate, name, address } = this.props;
         let cards = ratings.map(
             (rating)=> (
-                <ListItem onPress={}>
-                    <Rating key={ rating.id } { ...{ rating } }/>
+                <ListItem key={ rating.id } onPress={ () => navigate(<RatingPage { ...{ rating, name, address } } />) }>
+                    <Rating { ...{ rating } }/>
                 </ListItem>
             )
         );

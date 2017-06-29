@@ -5,10 +5,11 @@ import BorderInput from '../components/BorderInput';
 import PhotoSlider from '../components/PhotoSlider';
 import { imageDefault } from '../Constants';
 import { RestaurantSegment } from '../components/Restaurant';
+import BreakLine from '../components/BreakLine';
 
 export default class RestaurantPage extends Component {
     render(){
-        let { restaurant } = this.props;
+        let { restaurant, navigate } = this.props;
         let { photos } = restaurant
         if (photos.length === 0){
             photos = [ imageDefault ];
@@ -16,7 +17,8 @@ export default class RestaurantPage extends Component {
         return (
             <ScrollView style={ styles.container }>
                 <Label>{ restaurant.name }</Label>
-                <Label>{ restaurant.addressStr + '\n' }</Label>
+                <Label>{ restaurant.addressStr }</Label>
+                <BreakLine/>
                 <View style={ styles.nav }>
                     <View style={ styles.navItem }>
                         <Text>{ restaurant.atmosphere }</Text>
@@ -35,7 +37,7 @@ export default class RestaurantPage extends Component {
                     <Text style={ { color: 'green' } }><Icon style={ { color: 'green', fontSize: 16 } } name="cash"/>{ '  ' + restaurant.price } </Text>
                 </View>
                 <PhotoSlider { ...{ photos } }/>
-                <RestaurantSegment { ...{ restaurant } }/>
+                <RestaurantSegment { ...{ restaurant, navigate } }/>
             </ScrollView>
         );
     }

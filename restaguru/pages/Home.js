@@ -5,6 +5,7 @@ import BorderInput from '../components/BorderInput';
 import ResultSearch from '../components/ResultSearch';
 import { AdvanceSearch } from './';
 import { Filter } from '../entities';
+import BreakLine from '../components/BreakLine';
 
 export default class Home extends Component {
     constructor(props){
@@ -36,7 +37,8 @@ export default class Home extends Component {
         return (
             <ScrollView>
                 <BorderInput placeholder={ 'Search' } onChangeText={ this.handlerNameTyping }/>
-                <Text style={ styles.advanced } onPress={ this.advanced }> { '+ Advanced Search\n'} </Text>
+                <Text style={ styles.advanced } onPress={ this.advanced }> { '+ Advanced Search'} </Text>
+                <BreakLine/>
                 <ResultSearch { ...this.state } { ...this.props }/>
             </ScrollView>
         );

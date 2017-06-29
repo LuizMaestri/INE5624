@@ -46,7 +46,7 @@ class RestaurantCard extends Component {
 
 export default class RestaurantList extends Component {
     render(){
-        let { filter, restaurants } = this.props;
+        let { filter, restaurants, navigate } = this.props;
         let filteredRestaurants = restaurants.filter(
             ( restaurant ) => {
                 let filtered = true;
@@ -71,7 +71,7 @@ export default class RestaurantList extends Component {
             cards = filteredRestaurants.map(
                 ( restaurant ) => {
                     return (
-                        <ListItem style={ styles.item }  key={ restaurant.id } onPress={ () => this.props.navigate(<RestaurantPage { ...{ restaurant } } />) }>
+                        <ListItem style={ styles.item }  key={ restaurant.id } onPress={ () => navigate(<RestaurantPage { ...{ restaurant, navigate } } />) }>
                             <RestaurantCard restaurant={ restaurant } />
                         </ListItem>
                     );
@@ -80,7 +80,7 @@ export default class RestaurantList extends Component {
         } else {
             let name = filter.name.toUpperCase().trim();
             cards = (
-                <ListItem style={ { ...styles.notFound, ...styles.item } } onPress={ () => this.props.navigate(<Add onSubmit={ (element) => console.log(element) } name={ filter.name }/>) }>
+                <ListItem style={ { ...styles.notFound, ...styles.item } } onPress={ () => his.props.navigate(<Add onSubmit={ (element) => console.log(element) } name={ filter.name }/>) }>
                     <Text uppercase={ false }>
                         "{name}" Not Found. Verify restaurant`s name on search or {'\n'} 
                         <Text style={ styles.linkAdd }>
@@ -88,7 +88,6 @@ export default class RestaurantList extends Component {
                         </Text>
                         <Icon style={ styles.linkAdd } name="add-circle"/>
                     </Text>
-                    
                 </ListItem>
             );
 
@@ -115,7 +114,7 @@ export class RestaurantSegment extends Component {
     }
 
     render(){
-        let { restaurant } = this.props; 
+        let { restaurant, navigate } = this.props; 
         let segment;
         if (this.state.first){
             segment = (
@@ -129,7 +128,7 @@ export class RestaurantSegment extends Component {
             );
         } else {
             segment = (
-                <RatingList ratings={ restaurant.ratings }/>
+                <RatingList  navigate={ navigate } { ...restaurant }/>
             );
         }
         return (
