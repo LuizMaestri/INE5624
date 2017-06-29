@@ -26,7 +26,7 @@ export default class RestaurantPage extends Component {
                         <Text>{ ' ' + restaurant.satisfaction }</Text>
                         <Text>{ ' Satisfaction' }</Text>
                     </View>
-                    <View style={ {...styles.navItem, marginLeft: -30, paddingLeft: 20} }>
+                    <View style={ { ...styles.navItem, marginLeft: -30, paddingLeft: 20 } }>
                         <Text>{ restaurant.food }</Text>
                         <Text>{ 'Food' }</Text>
                     </View>
