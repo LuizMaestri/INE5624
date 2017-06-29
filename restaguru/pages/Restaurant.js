@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { ScrollView, View } from 'react-native';
-import { Label, Text } from 'native-base';
+import { Icon, Label, Text } from 'native-base';
 import BorderInput from '../components/BorderInput';
 import PhotoSlider from '../components/PhotoSlider';
 import { imageDefault } from '../Constants';
+import { RestaurantSegment } from '../components/Restaurant';
 
 export default class RestaurantPage extends Component {
     render(){
@@ -18,19 +19,23 @@ export default class RestaurantPage extends Component {
                 <Label>{ restaurant.addressStr + '\n' }</Label>
                 <View style={ styles.nav }>
                     <View style={ styles.navItem }>
-                        <Text >{ restaurant.atmosphere }</Text>
-                        <Text >{ 'Atmosphere' }</Text>
+                        <Text>{ restaurant.atmosphere }</Text>
+                        <Text>{ 'Atmosphere' }</Text>
                     </View>
                     <View style={ styles.navItem }>
-                        <Text >{ ' ' + restaurant.satisfaction }</Text>
-                        <Text >{ ' Satisfaction' }</Text>
+                        <Text>{ ' ' + restaurant.satisfaction }</Text>
+                        <Text>{ ' Satisfaction' }</Text>
                     </View>
                     <View style={ {...styles.navItem, marginLeft: -30, paddingLeft: 20} }>
-                        <Text >{ restaurant.food }</Text>
-                        <Text >{ 'Food' }</Text>
+                        <Text>{ restaurant.food }</Text>
+                        <Text>{ 'Food' }</Text>
                     </View>
                 </View>
+                <View>
+                    <Text style={ { color: 'green' } }><Icon style={ { color: 'green', fontSize: 16 } } name="cash"/>{ '  ' + restaurant.price } </Text>
+                </View>
                 <PhotoSlider { ...{ photos } }/>
+                <RestaurantSegment { ...{ restaurant } }/>
             </ScrollView>
         );
     }

@@ -1,7 +1,21 @@
 import React, { Component } from 'react';
-import { Container, Content, Card, CardItem, Icon, ListItem, List, Text, Thumbnail } from 'native-base';
+import { View } from 'react-native';
+import {
+    Button,
+    Container,
+    Content,
+    Card,
+    CardItem,
+    Icon,
+    ListItem,
+    List,
+    Segment,
+    Text,
+    Thumbnail
+} from 'native-base';
 import { RestaurantPage, Add } from '../pages';
 import { imageDefault } from '../Constants';
+import RatingList from '../components/Rating';
 
 class RestaurantCard extends Component {
     render(){
@@ -83,6 +97,57 @@ export default class RestaurantList extends Component {
             <List>
                 { cards }
             </List>
+        );
+    }
+}
+
+export class RestaurantSegment extends Component {
+    constructor(){
+        super();
+        this.state = {
+            first: true
+        };
+        this.handlerChangeSegment = this.handlerChangeSegment.bind(this);
+    }
+
+    handlerChangeSegment(){
+        this.setState({ first: !this.state.first });
+    }
+
+    render(){
+        let { restaurant } = this.props; 
+        let segment;
+        if (this.state.first){
+            segment = (
+                <Card>
+                    <CardItem>
+                        <Text>
+                            Kind: { restaurant.kind }
+                        </Text>
+                    </CardItem>
+                </Card>
+            );
+        } else {
+            segment = (
+                <RatingList ratings={ restaurant.ratings }/>
+            );
+        }
+        return (
+            <View>
+                <Segment>
+                    <Button active={ this.state.first } onPress={ () => this.handlerChangeSegment() }>
+                        <Text>
+                            Infos
+                        </Text>
+                    </Button>
+                    <Button active={ !this.state.first } onPress={ () => this.handlerChangeSegment() }>
+                        <Text>
+                            Notes
+                        </Text>
+                    </Button>
+                </Segment>
+                { segment }
+            </View>
         );
     }
 }
