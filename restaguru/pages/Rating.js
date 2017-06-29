@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, View } from 'react-native';
-import { Icon, Label, Text } from 'native-base';
-import { user as defaultUser } from '../Constants';
+import { Icon, Label, Text, Thumbnail } from 'native-base';
+import { user as defaultUser, imageDefault } from '../Constants';
 import BreakLine from '../components/BreakLine';
 
 class Comment extends Component {
@@ -40,11 +40,21 @@ export default class RatingPage extends Component {
     render(){
         let { rating, name, address } = this.props;
         let { user } = rating;
-
+        let img = imageDefault;
+        if (user.photo){
+            img = user.photo;
+        }
         return (
             <ScrollView style={ styles.container }>
-                <Label>{ name }</Label>
-                <Label>{ address.city + ', ' + address.country }</Label>
+                <View style={ styles.nav }>
+                    <View style={ styles.navItem }>
+                        <Label>{ name }</Label>
+                        <Label>{ address.city + ', ' + address.country }</Label>
+                    </View>
+                    <View style={ styles.navItem }>
+                        <Thumbnail large source={ img }/>
+                    </View>
+                </View>
                 <BreakLine/>
                 <View style={ styles.nav }>
                     <View style={ styles.navItem }>
