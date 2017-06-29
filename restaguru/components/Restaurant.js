@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Container, Content, Card, CardItem, Icon, ListItem, List, Text, Thumbnail } from 'native-base';
 import { RestaurantPage, Add } from '../pages';
+import { imageDefault } from '../Constants';
 
 class RestaurantCard extends Component {
     render(){
         let { restaurant } = this.props;
         let img;
         if (restaurant.photos.length == 0){
-            img = require('../img/default.png');
+            img = imageDefault;
         } else {
             img = restaurant.photos[0];
         }
