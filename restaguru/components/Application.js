@@ -37,8 +37,12 @@ export default class Application extends Component {
   }
 
   handlerAdd(restaurant){
+    let { address } = restaurant;
+    address = address.split(',');
+    restaurant.address = new Address(address[1].trim(), address[0].trim())
     let { lists } = this.state;
     let { restaurants } = lists;
+    restaurant = Restaurant.cast(restaurant);
     restaurants.push(restaurant);
     lists.restaurants = restaurants;
     this.setState({ lists });

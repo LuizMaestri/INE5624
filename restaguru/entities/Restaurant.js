@@ -11,35 +11,51 @@ export default class Restaurant{
     }
 
     get price(){
-        return this.ratings.map(
+        let price = this.ratings.map(
             (rating) => rating.price
         ).reduce(
             (a, b) => a + b, 0
         );
+        if (this.ratings.length === 0) {
+            return parseInt(price);
+        }
+        return parseInt(price / this.ratings.length);
     }
 
     get satisfaction(){
-        return this.ratings.map(
+        let satisfaction = this.ratings.map(
             (rating) => rating.satisfaction
         ).reduce(
             (a, b) => a + b, 0
         );
+        if (this.ratings.length === 0) {
+            return parseInt(satisfaction);
+        }
+        return parseInt(satisfaction / this.ratings.length);
     }
 
     get food(){
-        return this.ratings.map(
+        let food = this.ratings.map(
             (rating) => rating.food
         ).reduce(
             (a, b) => a + b, 0
         );
+        if (this.ratings.length === 0) {
+            return parseInt(food);
+        }
+        return parseInt(food / this.ratings.length);
     }
 
     get atmosphere(){
-        return this.ratings.map(
+        let atmosphere = this.ratings.map(
             (rating) => rating.atmosphere
         ).reduce(
             (a, b) => a + b, 0
         );
+        if (this.ratings.length === 0) {
+            return parseInt(atmosphere);
+        }
+        return parseInt(atmosphere / this.ratings.length);
     }
 
     get addressStr() {
@@ -56,6 +72,16 @@ export default class Restaurant{
         restaurant = new Restaurant(name);
         restaurant.ratings.push(new Rating(user));
         return restaurant;
+    }
+
+    static cast(restaurant){
+        return new Restaurant(
+            restaurant.name,
+            restaurant.address,
+            restaurant.kind,
+            restaurant.ratings,
+            restaurant.photos
+        )
     }
 }
 
