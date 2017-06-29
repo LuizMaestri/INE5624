@@ -14,7 +14,7 @@ export default class Application extends Component {
             new Restaurant('Gokoni', new Address('Brazil', 'São josé') , 1)
         ],
         gurus: [],
-        //macGayver
+        //macGyver
         navigate: (tab) =>  this.setState({ tab })
       },
       tab: null,
