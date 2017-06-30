@@ -26,7 +26,7 @@ export default class Initial extends Component {
     render(){
         return (
             <View>
-                <BorderInput placeholder={ 'name' } onChangeText={ (name)=> this.setState({ name }) }/>
+                <BorderInput placeholder={ 'Name' } onChangeText={ (name)=> this.setState({ name }) }/>
                 <Button full onPress={this.saveUser}>
                     <Text>
                         Login
