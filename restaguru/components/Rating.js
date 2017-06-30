@@ -4,6 +4,7 @@ import { List, ListItem, Card, CardItem, Text, Thumbnail } from 'native-base';
 import { imageDefault } from '../Constants';
 import { RatingPage, RestaurantPage } from '../pages';
 import { Restaurant } from '../entities';
+import { saveLog } from '../utils/Log'; 
 
 class Rating extends Component {
     render() {
@@ -31,7 +32,11 @@ export default class RatingList extends Component {
     back(){
         let restaurant = Restaurant.cast(this.props);
         let { navigate,  setBackFunc } = this.props;
-        return () => navigate(<RestaurantPage { ...{ restaurant, navigate, setBackFunc } } />)
+        return () => {
+            let log = { action: 'Back from rating page', date: new Date() };
+            saveLog(log);
+            navigate(<RestaurantPage { ...{ restaurant, navigate, setBackFunc } } />)
+        }
     }
 
     render() {
