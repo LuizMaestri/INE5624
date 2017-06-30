@@ -64,13 +64,19 @@ export default class Add extends Component {
         this.setState({name});
     }
 
-    handlerAddress(address){
+    handlerAddress(addressStr){
         clearTimeout(this.timeoutAddress);
         this.timeoutAddress = setTimeout(()=>{
-            let log = {action: `White ${address} as restaurant\`s address`, date: new Date().toString() }
+            let log = {action: `White ${addressStr} as restaurant\`s address`, date: new Date().toString() }
             saveLog(log);
         }, 200);
-        this.setState({address});
+        let { address } = this.state;
+        addressStr = addressStr.split(',');
+        address.city = addressStr[0].trim();
+        if (addressStr.length > 1){
+            address.country = addressStr[1].trim();
+        }
+        this.setState({ address });
     }
 
     handlerKind(kind){
@@ -135,7 +141,7 @@ export default class Add extends Component {
     handlerSubmit(){
         let log;
         let restaurant = this.state;
-        if (restaurant.name && restaurant.address && typeof restaurant.address === 'string' && restaurant.address.split(',').length === 2 && restaurant.kind){
+        if (restaurant.name && restaurant.address.city && restaurant.address.country && restaurant.kind){
             log = { action:`Add ${this.state.name}`, date: new Date().toString() };
             saveLog(log)
             return this.props.onSubmit(restaurant);
@@ -144,10 +150,8 @@ export default class Add extends Component {
             if(!restaurant.name){
                 errors += 'Restaurant`s name is required\n';
             }
-            if(restaurant.address && typeof restaurant.address !== 'string'){
+            if(!restaurant.address.city || !restaurant.address.country){
                 errors += 'Restaurant`s address is required\n';
-            }
-            if((restaurant.address && typeof restaurant.address === 'string' && restaurant.address.split(',').length !== 2) || typeof restaurant.address !== 'string'){
                 errors += 'Restaurant`s address has format (city`s name, country`s name)\n';
             }
             if(!restaurant.kind){

@@ -11,8 +11,8 @@ export default class Application extends Component {
     this.state = {
       lists : {
         restaurants: [
-            new Restaurant('Miyoshi', new Address('Brazil', 'Florianópolis') , 1),
-            new Restaurant('Gokoni', new Address('Brazil', 'São josé') , 1)
+            new Restaurant('Miyoshi', new Address('Brazil', 'Florianópolis') , 'Japonese'),
+            new Restaurant('Gokoni', new Address('Brazil', 'São josé') , 'Japonese')
         ],
         gurus: [],
         //macGyver
@@ -34,13 +34,25 @@ export default class Application extends Component {
   }
 
   handlerAdd(restaurant){
-    let { address } = restaurant;
-    address = address.split(',');
-    restaurant.address = new Address(address[1].trim(), address[0].trim())
     let { lists } = this.state;
     let { restaurants } = lists;
     restaurant = Restaurant.cast(restaurant);
-    restaurants.push(restaurant);
+    let add = true;
+    restaurants = restaurants.map(rest =>{
+      rest = Restaurant.cast(rest);
+      if (rest.equals(restaurant)){
+        add = false;
+        let { ratings, photos } = rest;
+        ratings.push(restaurant.ratings[0]);
+        photos = photos.concat(restaurants.photos);
+        rest.ratings = ratings;
+        rest.photos = photos;
+      }
+      return rest;
+    });
+    if (add){
+      restaurants.push(restaurant);
+    }
     CacheStore.set('restaurants', restaurants, 24 * 60);
     lists.restaurants = restaurants;
     this.setState({ lists });

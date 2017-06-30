@@ -3,4 +3,8 @@ export default class Address {
         this.country = country;
         this.city = city;
     }
+
+    equals(address){
+        return this.country == address.country && this.city == address.city;
+    }
 }

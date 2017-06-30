@@ -62,6 +62,10 @@ export default class Restaurant{
         return this.address.city + ', ' + this.address.country;
     }
 
+    equals(restaurant){
+        return this.name === restaurant.name && this.address.equals(restaurant.address);
+    }
+
     static generateId(){
         let thisId = id;
         id++;
