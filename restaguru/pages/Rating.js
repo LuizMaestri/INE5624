@@ -45,6 +45,8 @@ export default class RatingPage extends Component {
         if (user.photo){
             img = user.photo;
         }
+        let log = {action: `Visualize ${user.name} ratings for ${name}`, date: new Date().toString()};
+        saveLog(log);
         return (
             <ScrollView style={ styles.container }>
                 <View style={ styles.nav }>

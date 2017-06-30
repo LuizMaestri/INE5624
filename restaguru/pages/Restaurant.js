@@ -7,6 +7,7 @@ import { imageDefault } from '../Constants';
 import { RestaurantSegment } from '../components/Restaurant';
 import BreakLine from '../components/BreakLine';
 import KnobGrade from '../components/KnobGrade';
+import { saveLog } from '../utils/Log';
 
 export default class RestaurantPage extends Component {
     render(){
@@ -15,6 +16,8 @@ export default class RestaurantPage extends Component {
         if (photos.length === 0){
             photos = [ imageDefault ];
         }
+        let log = {action: `Visualize ${restaurant.name}\`s Pages`, date: new Date().toString()};
+        saveLog(log);
         return (
             <ScrollView style={ styles.container }>
                 <Label>{ restaurant.name }</Label>
