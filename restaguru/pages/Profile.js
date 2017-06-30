@@ -1,10 +1,25 @@
 import React, { Component } from 'react';
 import { ScrollView, View } from 'react-native';
-import { Text, Radio } from 'native-base';
+import { Label, Text, Radio } from 'native-base';
 import restaguru from '../theme/variables/restaguru';
 import restaguruLight from '../theme/variables/restaguru-light';
+import CacheStore from 'react-native-cache-store';
 
 export default class Profile extends Component {
+    constructor(){
+        super();
+        this.state = {
+            logs: [],
+            user: ''
+        }
+    }
+
+    async componentWillMount(){
+        CacheStore.get('user').then(user=>{
+            this.setState({ user});
+            CacheStore.get(user).then(value => this.setState({logs: value}));
+        });
+    }
     render(){
         let { theme, onChangeTheme } = this.props;
         return(
@@ -18,6 +33,10 @@ export default class Profile extends Component {
                         <Radio onPress={() => onChangeTheme(restaguruLight)} selected={theme == restaguruLight} disabled={theme == restaguruLight} />
                         <Text>Light Theme</Text>                        
                     </View>
+                </View>
+                <View style={ { marginVertical: 10, marginHorizontal: 15 } }>
+                    <Label>{ this.state.user + ':' }</Label>
+                    {this.state.logs.map(log=> <Text>{ log.action + '\n' + log.date + '\n\n'}</Text>)}
                 </View>
             </ScrollView>
         );

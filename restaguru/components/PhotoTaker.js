@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Image } from 'react-native';
 import { Button, Icon } from 'native-base';
 import ImagePicker from 'react-native-image-picker';
+import CacheStore from 'react-native-cache-store';
 
 export default class PhotoTaker extends Component {
     constructor(props){
@@ -22,15 +23,24 @@ export default class PhotoTaker extends Component {
             }
         };
         ImagePicker.showImagePicker(options, (response) => {
-            if (response.error) {
-                alert('ImagePicker Error: ', response.error);
+            let log;
+            if (!response.didCancel){
+                log = { action: 'Cancel photo add', date: new Date().toString() };
+            } else if (response.error) {
+                log = { action: `ImagePicker Error: ${response.error}`, date: new Date().toString() };
             }
-            else if (!response.didCancel){
+            else {
                 let photo = { uri: 'data:image/jpeg;base64,' + response.data };
-
+                log = { action: 'Addicting Photo', date: new Date().toString() };
                 this.setState({photo});
                 this.props.choosePhoto(photo);
             }
+            CacheStore.get('user').then(user=>{
+                CacheStore.get(user).then((value)=>{
+                    value.push(log);
+                    CacheStore.set(user, value, 24 * 60);
+                })
+            });
         });
     }
 

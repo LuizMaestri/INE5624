@@ -7,6 +7,8 @@ import PhotoSlider from '../components/PhotoSlider';
 import LabelInput from '../components/LabelInput';
 import { Restaurant } from '../entities';
 import { user } from '../Constants'
+import { saveLog } from '../utils/Log'
+import { okAlert } from '../utils/Alert';
 
 export default class Add extends Component {
     constructor(props){
@@ -23,6 +25,7 @@ export default class Add extends Component {
         this.handlerPrivateComment = this.handlerPrivateComment.bind(this);
         this.handlerSubmit = this.handlerSubmit.bind(this);
         this.handlerChoosePhoto = this.handlerChoosePhoto.bind(this);
+        this.completeSliding = this.completeSliding.bind(this);
     }  
 
     get rating(){
@@ -47,15 +50,35 @@ export default class Add extends Component {
         this.setState({ photos });
     }
 
+    completeSliding(slider, value) {
+        let log = { action:`set ${slider} in ${value}`, date: new Date().toString() };
+        saveLog(log);
+    }
+    
     handlerRestaurant(name){
+        clearTimeout(this.timeoutRestaurant);
+        this.timeoutRestaurant = setTimeout(()=>{
+            let log = {action: `White ${name} as restaurant\`s name`, date: new Date().toString() }
+            saveLog(log);
+        }, 200);
         this.setState({name});
     }
 
     handlerAddress(address){
+        clearTimeout(this.timeoutAddress);
+        this.timeoutAddress = setTimeout(()=>{
+            let log = {action: `White ${address} as restaurant\`s address`, date: new Date().toString() }
+            saveLog(log);
+        }, 200);
         this.setState({address});
     }
 
     handlerKind(kind){
+        clearTimeout(this.timeoutKind);
+        this.timeoutKind = setTimeout(()=>{
+            let log = {action: `White ${kind} as restaurant\`s kind`, date: new Date().toString() }
+            saveLog(log);
+        }, 200);
         this.setState({kind});
     }
 
@@ -84,12 +107,22 @@ export default class Add extends Component {
     }
 
     handlerComment(value){
+        clearTimeout(this.timeoutComment);
+        this.timeoutComment = setTimeout(()=>{
+            let log = {action: `Add a comment`, date: new Date().toString() }
+            saveLog(log);
+        }, 200);
         let rating = this.rating;
         rating.comment = value;
         this.rating = rating;
     }
 
     handlerPrivateComment(value){
+        clearTimeout(this.timeoutPrivateComment);
+        this.timeoutPrivateComment = setTimeout(()=>{
+            let log = {action: `Add a private comment`, date: new Date().toString() }
+            saveLog(log);
+        }, 200);
         let rating = this.rating;
         rating.privateComment = value;
         this.rating = rating;
@@ -100,21 +133,55 @@ export default class Add extends Component {
     }
 
     handlerSubmit(){
-        this.props.onSubmit(this.state);
+        let log;
+        let restaurant = this.state;
+        if (restaurant.name && restaurant.address && typeof restaurant.address === 'string' && restaurant.address.split(',').length === 2 && restaurant.kind){
+            log = { action:`Add ${this.state.name}`, date: new Date().toString() };
+            saveLog(log)
+            return this.props.onSubmit(restaurant);
+        } else{
+            let errors = ''
+            if(!restaurant.name){
+                errors += 'Restaurant`s name is required\n';
+            }
+            if(restaurant.address && typeof restaurant.address !== 'string'){
+                errors += 'Restaurant`s address is required\n';
+            }
+            if((restaurant.address && typeof restaurant.address === 'string' && restaurant.address.split(',').length !== 2) || typeof restaurant.address !== 'string'){
+                errors += 'Restaurant`s address has format (city`s name, country`s name)\n';
+            }
+            if(!restaurant.kind){
+                errors += 'Restaurant`s kind is required\n';
+            }
+            log = {
+                action:`Error on addicting restaurant:\n ${errors}`,
+                date: new Date().toString()
+            };
+            saveLog(log);
+            return okAlert('Error on addicting restaurant', errors);
+        }
     }
 
     render(){
         return (
             <ScrollView>
                 <BorderInput placeholder={ 'Restaurant' } onChangeText={ this.handlerRestaurant } value={this.state.name}/>
-                <BorderInput placeholder={ 'Address' } onChangeText={ this.handlerAddress }/>
+                <BorderInput placeholder={ 'Address (City, Country)' } onChangeText={ this.handlerAddress }/>
                 <BorderInput placeholder={ 'Kind' } onChangeText={ this.handlerKind }/>
                 <PhotoSlider photos={ [...this.photos, false] } choosePhoto={ this.handlerChoosePhoto }/>
                 <Label style={ { margin: 10 } }>Scores</Label>
-                <SliderGrade value={ this.rating.food } name={ 'Food' } minimumTrackTintColor='#30a935' { ...styles.foodSlider } onValueChange={ this.handlerFood }/>
-                <SliderGrade value={ this.rating.atmosphere } name={ 'Atmosphere' } minimumTrackTintColor='#30a935' { ...styles.foodSlider } onValueChange={ this.handlerAtmosphere }/>
-                <SliderGrade value={ this.rating.price } name={ 'Price' } minimumTrackTintColor='#30a935' { ...styles.foodSlider } onValueChange={ this.handlerPrice }/>
-                <SliderGrade value={ this.rating.satisfaction } name={ 'Satisfaction' } minimumTrackTintColor='#30a935' { ...styles.foodSlider } onValueChange={ this.handlerSatisfaction }/>
+                <SliderGrade value={ this.rating.food } name={ 'Food' } 
+                    minimumTrackTintColor='#30a935' { ...styles.foodSlider } onValueChange={ this.handlerFood }
+                    onSlidingComplete={ () => this.completeSliding('Satisfaction', this.rating.satisfaction)}/>
+                <SliderGrade value={ this.rating.atmosphere } name={ 'Atmosphere' } 
+                    minimumTrackTintColor='#30a935' { ...styles.foodSlider } onValueChange={ this.handlerAtmosphere } 
+                    onSlidingComplete={ () => this.completeSliding('Atmosphere', this.rating.atmosphere)}/>
+                <SliderGrade value={ this.rating.price } name={ 'Price' } 
+                    minimumTrackTintColor='#30a935' { ...styles.foodSlider } onValueChange={ this.handlerPrice }
+                    onSlidingComplete={ () => this.completeSliding('Price', this.rating.price)}/>
+                <SliderGrade value={ this.rating.satisfaction } name={ 'Satisfaction' } 
+                    minimumTrackTintColor='#30a935' { ...styles.foodSlider } onValueChange={ this.handlerSatisfaction }
+                    onSlidingComplete={ () => this.completeSliding('Satisfaction', this.rating.satisfaction)}/>
                 <LabelInput label={ 'Comments' } onChangeText={ this.handlerComment } multiline={ true }/>
                 <LabelInput label={ 'Private Comments' } onChangeText={ this.handlerPrivateComment } multiline={ true }/>
                 <Button full success onPress={ this.handlerSubmit }>

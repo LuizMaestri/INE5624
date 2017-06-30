@@ -3,6 +3,7 @@ import { ScrollView , View } from 'react-native';
 import { Button, CheckBox, Label } from 'native-base';
 import BorderInput from '../components/BorderInput';
 import SliderGrade from '../components/SliderGrade';
+import { saveLog } from '../utils/Log';
 
 export default class AdvanceSearch extends Component {
     constructor(props) {
@@ -32,19 +33,39 @@ export default class AdvanceSearch extends Component {
         this.setState({ filter });
     }
 
+    completeSliding(slider, value) {
+        let log = { action:`set ${slider} in ${value}`, date: new Date().toString() };
+        saveLog(log);
+    }
+
     handlerNameTyping(name){
+        clearTimeout(this.timeoutName);
+        this.timeoutName = setTimeout(()=>{
+            let log = {action: `Set ${name} as restaurant\`s name for search`, date: new Date().toString() }
+            saveLog(log);
+        }, 200);
         let { filter } = this;
         filter.name = name;
         this.filter = filter;
     }
 
     handlerCountryTyping(country){
+        clearTimeout(this.timeoutCountry);
+        this.timeoutCountry = setTimeout(()=>{
+            let log = {action: `Set ${country} as restaurant\`s country for search`, date: new Date().toString() }
+            saveLog(log);
+        }, 200);
         let { filter } = this;
         filter.country = country;
         this.filter = filter;
     }
 
     handlerCityTyping(city){
+        clearTimeout(this.timeoutCity);
+        this.timeoutCity = setTimeout(()=>{
+            let log = {action: `Set ${city} as restaurant\`s city for search`, date: new Date().toString() }
+            saveLog(log);
+        }, 200);
         let { filter } = this;
         filter.city = city;
         this.filter = filter;
@@ -76,25 +97,53 @@ export default class AdvanceSearch extends Component {
 
     handlerCheckPrice() {
         let { filter } = this;
-        filter.price.using = !filter.price.using
+        filter.price.using = !filter.price.using;
+        let log;
+        if (filter.price.using){
+            log = { action: 'Using price as filter', date: new Date().toString()};
+        } else {
+            log = { action: 'Not using price as filter', date: new Date().toString()};
+        }
+        saveLog(log);
         this.filter = filter;
     }
 
     handlerCheckAtmosphere() {
         let { filter } = this;
-        filter.atmosphere.using = !filter.atmosphere.using
+        filter.atmosphere.using = !filter.atmosphere.using;
+        let log;
+        if (filter.atmosphere.using){
+            log = { action: 'Using atmosphere as filter', date: new Date().toString()};
+        } else {
+            log = { action: 'Not using atmosphere as filter', date: new Date().toString()};
+        }
+        saveLog(log);
         this.filter = filter;
     }
     
     handlerCheckFood() {
         let { filter } = this;
-        filter.food.using = !filter.food.using
+        filter.food.using = !filter.food.using;
+        let log;
+        if (filter.food.using){
+            log = { action: 'Using food as filter', date: new Date().toString()};
+        } else {
+            log = { action: 'Not using food as filter', date: new Date().toString()};
+        }
+        saveLog(log);
         this.filter = filter;
     }
     
     handlerCheckSatisfaction() {
         let { filter } = this;
-        filter.satisfaction.using = !filter.satisfaction.using
+        filter.satisfaction.using = !filter.satisfaction.using;
+        let log;
+        if (filter.satisfaction.using){
+            log = { action: 'Using satisfaction as filter', date: new Date().toString()};
+        } else {
+            log = { action: 'Not using satisfaction as filter', date: new Date().toString()};
+        }
+        saveLog(log);
         this.filter = filter;
     }
 
@@ -114,19 +163,27 @@ export default class AdvanceSearch extends Component {
                 <BorderInput placeholder={ 'City' } onChangeText={ this.handlerCityTyping }/>
                 <View style={ { flex: 1 } }>
                     <CheckBox checked={ price.using } onPress={ this.handlerCheckPrice }/>
-                    <SliderGrade disabled={ !price.using } value={ filter.priceValue } name={ 'Price' } minimumTrackTintColor='#30a935' { ...styles.foodSlider } onValueChange={ this.handlerPrice }/>
+                    <SliderGrade disabled={ !price.using } value={ filter.priceValue } name={ 'Price' } 
+                        minimumTrackTintColor='#30a935' { ...styles.foodSlider } onValueChange={ this.handlerPrice }
+                        onSlidingComplete={ () => this.completeSliding('Price', filter.priceValue)}/>
                 </View>
                 <View>
                     <CheckBox checked={ atmosphere.using }  onPress={ this.handlerCheckAtmosphere }/>
-                    <SliderGrade disabled={ !atmosphere.using } value={ filter.atmosphereValue } name={ 'Atmosphere' } minimumTrackTintColor='#30a935' { ...styles.foodSlider } onValueChange={ this.handlerAtmosphere }/>
+                    <SliderGrade disabled={ !atmosphere.using } value={ filter.atmosphereValue } name={ 'Atmosphere' } 
+                        minimumTrackTintColor='#30a935' { ...styles.foodSlider } onValueChange={ this.handlerAtmosphere }
+                        onSlidingComplete={ () => this.completeSliding('Atmosphere', filter.atmosphereValue)}/>
                 </View>
                 <View>
                     <CheckBox checked={ food.using }  onPress={ this.handlerCheckFood }/>
-                    <SliderGrade disabled={ !food.using } value={ filter.foodValue } name={ 'Food' } minimumTrackTintColor='#30a935' { ...styles.foodSlider } onValueChange={ this.handlerFood }/>
+                    <SliderGrade disabled={ !food.using } value={ filter.foodValue } name={ 'Food' } 
+                        minimumTrackTintColor='#30a935' { ...styles.foodSlider } onValueChange={ this.handlerFood }
+                        onSlidingComplete={ () => this.completeSliding('Food', filter.foodValue)}/>
                 </View>
                 <View>
                     <CheckBox checked={ satisfaction.using }  onPress={ this.handlerCheckSatisfaction }/>
-                    <SliderGrade disabled={ !satisfaction.using } value={ filter.satisfactionValue } name={ 'Satisfaction' } minimumTrackTintColor='#30a935' { ...styles.foodSlider } onValueChange={ this.handlerSatisfaction }/>
+                    <SliderGrade disabled={ !satisfaction.using } value={ filter.satisfactionValue } name={ 'Satisfaction' } 
+                        minimumTrackTintColor='#30a935' { ...styles.foodSlider } onValueChange={ this.handlerSatisfaction }
+                        onSlidingComplete={ () => this.completeSliding('Satisfaction', filter.satisfactionValue)}/>
                 </View>
                 <Button full success onPress={ this.handlerSubmit  }>
                     <Label>Search</Label>

@@ -6,6 +6,7 @@ import ResultSearch from '../components/ResultSearch';
 import { AdvanceSearch } from './';
 import { Filter } from '../entities';
 import BreakLine from '../components/BreakLine';
+import CacheStore from 'react-native-cache-store';
 
 export default class Home extends Component {
     constructor(props){
@@ -22,13 +23,29 @@ export default class Home extends Component {
     }
 
     handlerNameTyping(name){
-        clearTimeout(this.interval);
+        clearTimeout(this.timeout);
         let { filter } = this.state;
         filter.name = name;
-        this.interval = setTimeout(() => this.setState({ filter }), 200);
+        this.timeout = setTimeout(() => {
+            let log = { action:`search for ${name}`, date: new Date().toString() };
+            CacheStore.get('user').then(user=>{
+                CacheStore.get(user).then((value)=>{
+                    value.push(log);
+                    CacheStore.set(user, value, 24 * 60);
+                })
+            });
+            this.setState({ filter })
+        }, 200);
     }
 
     advanced(){
+        let log = { action: 'Click on Advanced Search', date: new Date().toString() };
+        CacheStore.get('user').then(user=>{
+            CacheStore.get(user).then((value)=>{
+                value.push(log);
+                CacheStore.set(user, value, 24 * 60);
+            })
+        });
         this.props.navigate((<AdvanceSearch { ...this.state } { ...this.props } />));
     }
 
