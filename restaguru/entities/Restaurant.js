@@ -63,7 +63,7 @@ export default class Restaurant{
     }
 
     equals(restaurant){
-        return this.name === restaurant.name && this.address.equals(restaurant.address);
+        return this.name.toUpperCase() === restaurant.name.toUpperCase() && this.address.equals(restaurant.address);
     }
 
     static generateId(){

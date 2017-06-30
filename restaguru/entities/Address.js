@@ -5,6 +5,6 @@ export default class Address {
     }
 
     equals(address){
-        return this.country == address.country && this.city == address.city;
+        return this.country.toUpperCase() == address.country.toUpperCase() && this.city.toUpperCase() == address.city.toUpperCase();
     }
 }

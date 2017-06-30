@@ -56,6 +56,7 @@ export default class Add extends Component {
     }
     
     handlerRestaurant(name){
+        name = name.trim();
         clearTimeout(this.timeoutRestaurant);
         this.timeoutRestaurant = setTimeout(()=>{
             let log = {action: `White ${name} as restaurant\`s name`, date: new Date().toString() }
@@ -65,6 +66,7 @@ export default class Add extends Component {
     }
 
     handlerAddress(addressStr){
+        addressStr = addressStr.trim();
         clearTimeout(this.timeoutAddress);
         this.timeoutAddress = setTimeout(()=>{
             let log = {action: `White ${addressStr} as restaurant\`s address`, date: new Date().toString() }
@@ -80,6 +82,7 @@ export default class Add extends Component {
     }
 
     handlerKind(kind){
+        kind = kind.trim();
         clearTimeout(this.timeoutKind);
         this.timeoutKind = setTimeout(()=>{
             let log = {action: `White ${kind} as restaurant\`s kind`, date: new Date().toString() }
@@ -119,7 +122,7 @@ export default class Add extends Component {
             saveLog(log);
         }, 200);
         let rating = this.rating;
-        rating.comment = value;
+        rating.comment = value.trim();
         this.rating = rating;
     }
 
@@ -130,7 +133,7 @@ export default class Add extends Component {
             saveLog(log);
         }, 200);
         let rating = this.rating;
-        rating.privateComment = value;
+        rating.privateComment = value.trim();
         this.rating = rating;
     }
 
