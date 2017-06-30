@@ -81,7 +81,7 @@ export default class Restaurant{
     static cast(restaurant){
         return new Restaurant(
             restaurant.name,
-            restaurant.address,
+            Address.cast(restaurant.address),
             restaurant.kind,
             restaurant.ratings,
             restaurant.photos

@@ -10,10 +10,7 @@ export default class Application extends Component {
     super();
     this.state = {
       lists : {
-        restaurants: [
-            new Restaurant('Miyoshi', new Address('Brazil', 'Florianópolis') , 'Japonese'),
-            new Restaurant('Gokoni', new Address('Brazil', 'São josé') , 'Japonese')
-        ],
+        restaurants: [],
         gurus: [],
         //macGyver
         navigate: tab =>  this.setState({ tab }),
@@ -27,6 +24,19 @@ export default class Application extends Component {
     this.handlerAdd = this.handlerAdd.bind(this);
     this.backHome = this.backHome.bind(this);
     this.returnPage = this.returnPage.bind(this);
+  }
+
+  componentDidMount(){
+    CacheStore.get('restaurants').then(value =>{
+      this.setState({
+        lists:{
+          restaurants: value.map(Restaurant.cast),
+          gurus: this.state.lists.gurus,
+          navigate: this.state.lists.navigate,
+          setBackFunc: this.state.lists.setBackFunc
+        }
+      });
+    });
   }
 
   selectTab(tab, tabName){

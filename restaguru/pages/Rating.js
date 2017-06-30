@@ -81,7 +81,7 @@ export default class RatingPage extends Component {
                 </View>
                 
                 <View>
-                    <Text style={ { color: 'green' } }><Icon style={ { color: 'green', fontSize: 16 } } name="cash"/>{ '  ' + restaurant.price } </Text>
+                    <Text style={ { color: 'green' } }><Icon style={ { color: 'green', fontSize: 16 } } name="cash"/>{ '  ' + rating.price } </Text>
                 </View>
                 <Comment comment={ rating.comment } privateComment={ rating.privateComment } { ...{ user } }/>
             </ScrollView>

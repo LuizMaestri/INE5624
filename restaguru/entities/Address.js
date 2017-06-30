@@ -7,4 +7,8 @@ export default class Address {
     equals(address){
         return this.country.toUpperCase() == address.country.toUpperCase() && this.city.toUpperCase() == address.city.toUpperCase();
     }
+
+    static cast(address){
+        return new Address(address.country, address.city);
+    }
 }
