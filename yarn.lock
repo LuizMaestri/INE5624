@@ -3111,6 +3111,10 @@ react-devtools-core@^2.1.8:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
+react-native-cache-store@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-cache-store/-/react-native-cache-store-1.0.2.tgz#324558c9fab7cd98efc975ada00ce6e1533737e1"
+
 react-native-drawer@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/react-native-drawer/-/react-native-drawer-2.3.0.tgz#a0369ec80ff0b61c9f152dbdea91fe76c843113a"
