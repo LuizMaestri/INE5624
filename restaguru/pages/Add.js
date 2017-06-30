@@ -143,7 +143,7 @@ export default class Add extends Component {
         let restaurant = this.state;
         if (restaurant.name && restaurant.address.city && restaurant.address.country && restaurant.kind){
             log = { action:`Add ${this.state.name}`, date: new Date().toString() };
-            saveLog(log)
+            saveLog(log);
             return this.props.onSubmit(restaurant);
         } else{
             let errors = ''

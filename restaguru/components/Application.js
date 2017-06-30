@@ -44,7 +44,7 @@ export default class Application extends Component {
         add = false;
         let { ratings, photos } = rest;
         ratings.push(restaurant.ratings[0]);
-        photos = photos.concat(restaurants.photos);
+        photos = photos.concat(restaurant.photos);
         rest.ratings = ratings;
         rest.photos = photos;
       }
