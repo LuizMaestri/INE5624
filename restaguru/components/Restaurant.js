@@ -51,6 +51,15 @@ class RestaurantCard extends Component {
 export default class RestaurantList extends Component {
     render(){
         let { filter, restaurants, navigate, onSubmit, setBackFunc } = this.props;
+        if (restaurants.length === 0){
+            return(
+                <ListItem style={ { ...styles.notFound, ...styles.item } } onPress={ () => navigate(<Add onSubmit={ onSubmit } name={ filter.name }/>) }>
+                    <Text uppercase={ true }>
+                        No restaurant registered
+                    </Text>
+                </ListItem>
+            );
+        }
         let filteredRestaurants = restaurants.filter(
             ( restaurant ) => {
                 let filtered = true;

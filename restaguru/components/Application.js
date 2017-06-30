@@ -27,10 +27,13 @@ export default class Application extends Component {
   }
 
   componentDidMount(){
-    CacheStore.get('restaurants').then(value =>{
+    CacheStore.get('restaurants').then(restaurants => {
+      if (!restaurants){
+        restaurants = []
+      }
       this.setState({
         lists:{
-          restaurants: value.map(Restaurant.cast),
+          restaurants: restaurants.map(Restaurant.cast),
           gurus: this.state.lists.gurus,
           navigate: this.state.lists.navigate,
           setBackFunc: this.state.lists.setBackFunc
