@@ -50,7 +50,7 @@ class RestaurantCard extends Component {
 
 export default class RestaurantList extends Component {
     render(){
-        let { filter, restaurants, navigate, onSubmit } = this.props;
+        let { filter, restaurants, navigate, onSubmit, setBackFunc } = this.props;
         let filteredRestaurants = restaurants.filter(
             ( restaurant ) => {
                 let filtered = true;
@@ -75,7 +75,7 @@ export default class RestaurantList extends Component {
             cards = filteredRestaurants.map(
                 ( restaurant ) => {
                     return (
-                        <ListItem style={ styles.item }  key={ restaurant.id } onPress={ () => navigate(<RestaurantPage { ...{ restaurant, navigate } } />) }>
+                        <ListItem style={ styles.item }  key={ restaurant.id } onPress={ () => navigate(<RestaurantPage { ...{ restaurant, navigate, setBackFunc } } />) }>
                             <RestaurantCard restaurant={ restaurant } />
                         </ListItem>
                     );
@@ -118,7 +118,7 @@ export class RestaurantSegment extends Component {
     }
 
     render(){
-        let { restaurant, navigate } = this.props; 
+        let { restaurant, navigate,  setBackFunc } = this.props; 
         let segment;
         if (this.state.first){
             segment = (
@@ -132,7 +132,7 @@ export class RestaurantSegment extends Component {
             );
         } else {
             segment = (
-                <RatingList  navigate={ navigate } { ...restaurant }/>
+                <RatingList  navigate={ navigate } setBackFunc={ setBackFunc } { ...restaurant }/>
             );
         }
         return (

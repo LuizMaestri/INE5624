@@ -39,8 +39,13 @@ class Comment extends Component {
 }
 
 export default class RatingPage extends Component {
+    componentWillMount(){
+        let { setBackFunc, back } = this.props;
+        setBackFunc(back());        
+    }
+
     render(){
-        let { rating, name, address } = this.props;
+        let { rating, name, address, setBackFunc, back } = this.props;
         let { user } = rating;
         let img = imageDefault;
         if (user.photo){

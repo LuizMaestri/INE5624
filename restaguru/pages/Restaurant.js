@@ -11,7 +11,7 @@ import { saveLog } from '../utils/Log';
 
 export default class RestaurantPage extends Component {
     render(){
-        let { restaurant, navigate } = this.props;
+        let { restaurant, navigate, setBackFunc } = this.props;
         let { photos } = restaurant
         if (photos.length === 0){
             photos = [ imageDefault ];
@@ -41,7 +41,7 @@ export default class RestaurantPage extends Component {
                     <Text style={ { color: 'green' } }><Icon style={ { color: 'green', fontSize: 16 } } name="cash"/>{ '  ' + restaurant.price } </Text>
                 </View>
                 <PhotoSlider { ...{ photos } }/>
-                <RestaurantSegment { ...{ restaurant, navigate } }/>
+                <RestaurantSegment { ...{ restaurant, navigate, setBackFunc } }/>
             </ScrollView>
         );
     }

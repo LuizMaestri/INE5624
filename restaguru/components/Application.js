@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Body, Button, Container, Content, Footer, FooterTab, Header, Icon, Left, Title } from 'native-base';
-import { Text } from 'react-native';
+import { Platform, Text } from 'react-native';
 import { Home, Add, Profile, Initial } from '../pages';
 import { Address, Restaurant } from '../entities';
 import CacheStore from 'react-native-cache-store';
@@ -16,14 +16,17 @@ export default class Application extends Component {
         ],
         gurus: [],
         //macGyver
-        navigate: (tab) =>  this.setState({ tab })
+        navigate: tab =>  this.setState({ tab }),
+        setBackFunc: back => this.setState({ back })
       },
       tab: null,
-      tabName: 'home'
+      tabName: 'home',
+      back: null
     };
     this.selectTab = this.selectTab.bind(this);
     this.handlerAdd = this.handlerAdd.bind(this);
     this.backHome = this.backHome.bind(this);
+    this.returnPage = this.returnPage.bind(this);
   }
 
   selectTab(tab, tabName){
@@ -65,10 +68,23 @@ export default class Application extends Component {
     this.setState({ tab, tabName });
   }
 
+  returnPage(){
+    this.state.back();
+    this.setState({ back: null });
+  }
+
   render() {
     let header = (
       <Header>
-        <Left/>
+        {
+          this.state.back ? 
+            <Left>
+              <Button transparent onPress={ this.returnPage }>
+                <Icon  name={ Platform.OS === 'ios' ? 'arrow-left': 'arrow-back' }/>
+              </Button>
+            </Left>
+            : <Left/>
+        }
         <Body>
           <Title>
             RESTAGURU
@@ -101,7 +117,7 @@ export default class Application extends Component {
               <Button { ...(this.selectTab((<Profile {...this.props}/>), 'profile')) }>
                 <Icon name="person"/>
               </Button>
-              <Button { ...(this.selectTab((<Home onSubmit={ this.handlerAdd } { ...this.state.lists } />), 'home')) }>
+              <Button { ...(this.selectTab((<Home backPage={ this.setBackFunc } onSubmit={ this.handlerAdd } { ...this.state.lists } />), 'home')) }>
                 <Icon name="search"/>
               </Button>
               <Button { ...(this.selectTab((<Add onSubmit={ this.handlerAdd }/>), 'add')) }>
