@@ -40,8 +40,8 @@ export default class Application extends Component {
     let { lists } = this.state;
     let { restaurants } = lists;
     restaurant = Restaurant.cast(restaurant);
-    CacheStore.set('restaurants', restaurants, 24 * 60);
     restaurants.push(restaurant);
+    CacheStore.set('restaurants', restaurants, 24 * 60);
     lists.restaurants = restaurants;
     this.setState({ lists });
     this.backHome();
