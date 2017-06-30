@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Body, Button, Container, Content, Footer, FooterTab, Header, Icon, Left, Title } from 'native-base';
 import { Text } from 'react-native';
-import { Home, Add, Profile } from '../pages';
+import { Home, Add, Profile, Initial } from '../pages';
 import { Address, Restaurant } from '../entities';
+import CacheStore from 'react-native-cache-store';
 
 export default class Application extends Component {
   constructor(){
@@ -25,10 +26,6 @@ export default class Application extends Component {
     this.backHome = this.backHome.bind(this);
   }
 
-  componentWillMount(){
-    this.backHome();
-  }
-
   selectTab(tab, tabName){
     return {
       active: this.state.tabName == tabName,
@@ -43,6 +40,7 @@ export default class Application extends Component {
     let { lists } = this.state;
     let { restaurants } = lists;
     restaurant = Restaurant.cast(restaurant);
+    CacheStore.set('restaurants', restaurants, 24 * 60);
     restaurants.push(restaurant);
     lists.restaurants = restaurants;
     this.setState({ lists });
@@ -56,16 +54,33 @@ export default class Application extends Component {
   }
 
   render() {
+    let header = (
+      <Header>
+        <Left/>
+        <Body>
+          <Title>
+            RESTAGURU
+          </Title>
+        </Body>
+      </Header>
+    );
+    if(!this.state.tab){
+      return (
+        <Container>
+          { header }
+          <Content>
+            <Initial home={this.backHome}/>
+          </Content>
+          <Footer>
+            <FooterTab>
+            </FooterTab>
+          </Footer>
+        </Container>
+      )
+    }
     return (
         <Container>
-          <Header>
-            <Left/>
-            <Body>
-              <Title>
-                RESTAGURU
-              </Title>
-            </Body>
-          </Header>
+          { header }
           <Content>
             { this.state.tab }
           </Content>
