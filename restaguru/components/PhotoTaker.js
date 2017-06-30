@@ -24,7 +24,7 @@ export default class PhotoTaker extends Component {
         };
         ImagePicker.showImagePicker(options, (response) => {
             let log;
-            if (!response.didCancel){
+            if (response.didCancel){
                 log = { action: 'Cancel photo add', date: new Date().toString() };
             } else if (response.error) {
                 log = { action: `ImagePicker Error: ${response.error}`, date: new Date().toString() };
