@@ -22,6 +22,7 @@ export default class Profile extends Component {
     }
     render(){
         let { theme, onChangeTheme } = this.props;
+        let id = 1;
         return(
             <ScrollView>
                 <View style={styles.nav}>
@@ -36,7 +37,7 @@ export default class Profile extends Component {
                 </View>
                 <View style={ { marginVertical: 10, marginHorizontal: 15 } }>
                     <Label>{ this.state.user + ':' }</Label>
-                    {this.state.logs.map(log=> <Text>{ log.action + '\n' + log.date + '\n\n'}</Text>)}
+                    {this.state.logs.map(log=> <Text key={ id++ }>{ log.action + '\n' + log.date + '\n\n'}</Text>)}
                 </View>
             </ScrollView>
         );
