@@ -11,8 +11,7 @@ export default class Home extends Component {
     constructor(props){
         super(props);
         this.state = {
-            filter: new Filter(),
-            navigate: props.navigate
+            filter: new Filter()
         };
         this.handlerNameTyping = this.handlerNameTyping.bind(this);
         this.advanced = this.advanced.bind(this);
