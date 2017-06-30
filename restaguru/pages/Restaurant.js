@@ -6,6 +6,7 @@ import PhotoSlider from '../components/PhotoSlider';
 import { imageDefault } from '../Constants';
 import { RestaurantSegment } from '../components/Restaurant';
 import BreakLine from '../components/BreakLine';
+import KnobGrade from '../components/KnobGrade';
 
 export default class RestaurantPage extends Component {
     render(){
