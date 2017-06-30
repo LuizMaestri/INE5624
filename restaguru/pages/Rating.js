@@ -4,6 +4,7 @@ import { Icon, Label, Text, Thumbnail } from 'native-base';
 import { user as defaultUser, imageDefault } from '../Constants';
 import BreakLine from '../components/BreakLine';
 import KnobGrade from '../components/KnobGrade';
+import { saveLog } from '../utils/Log';
 
 class Comment extends Component {
     render(){
