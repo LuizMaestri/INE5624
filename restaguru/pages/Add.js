@@ -56,7 +56,7 @@ export default class Add extends Component {
     }
     
     handlerRestaurant(name){
-        name = name.trim();
+        name = name
         clearTimeout(this.timeoutRestaurant);
         this.timeoutRestaurant = setTimeout(()=>{
             let log = {action: `White ${name} as restaurant\`s name`, date: new Date().toString() }
@@ -66,7 +66,7 @@ export default class Add extends Component {
     }
 
     handlerAddress(addressStr){
-        addressStr = addressStr.trim();
+        addressStr = addressStr;
         clearTimeout(this.timeoutAddress);
         this.timeoutAddress = setTimeout(()=>{
             let log = {action: `White ${addressStr} as restaurant\`s address`, date: new Date().toString() }
@@ -74,15 +74,15 @@ export default class Add extends Component {
         }, 200);
         let { address } = this.state;
         addressStr = addressStr.split(',');
-        address.city = addressStr[0].trim();
+        address.city = addressStr[0];
         if (addressStr.length > 1){
-            address.country = addressStr[1].trim();
+            address.country = addressStr[1];
         }
         this.setState({ address });
     }
 
     handlerKind(kind){
-        kind = kind.trim();
+        kind = kind;
         clearTimeout(this.timeoutKind);
         this.timeoutKind = setTimeout(()=>{
             let log = {action: `White ${kind} as restaurant\`s kind`, date: new Date().toString() }
@@ -147,6 +147,12 @@ export default class Add extends Component {
         if (restaurant.name && restaurant.address.city && restaurant.address.country && restaurant.kind){
             log = { action:`Add ${this.state.name}`, date: new Date().toString() };
             saveLog(log);
+            let { name, address, kind } = restaurant;
+            restaurant.name = name.trim();
+            restaurant.kind = kind.trim();
+            address.city = address.city.trim();
+            address.country = address.country.trim();
+            restaurant.address = address;
             return this.props.onSubmit(restaurant);
         } else{
             let errors = ''
