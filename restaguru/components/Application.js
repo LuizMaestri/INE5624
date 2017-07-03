@@ -76,7 +76,7 @@ export default class Application extends Component {
   }
 
   backHome(){
-    let tab = (<Home { ...this.state.lists }/>);
+    let tab = (<Home onSubmit={ this.handlerAdd }  { ...this.state.lists }/>);
     let tabName = 'home';
     this.setState({ tab, tabName });
   }
@@ -130,7 +130,7 @@ export default class Application extends Component {
               <Button { ...(this.selectTab((<Profile {...this.props}/>), 'profile')) }>
                 <Icon name="person"/>
               </Button>
-              <Button { ...(this.selectTab((<Home backPage={ this.setBackFunc } onSubmit={ this.handlerAdd } { ...this.state.lists } />), 'home')) }>
+              <Button { ...(this.selectTab((<Home onSubmit={ this.handlerAdd } { ...this.state.lists } />), 'home')) }>
                 <Icon name="search"/>
               </Button>
               <Button { ...(this.selectTab((<Add onSubmit={ this.handlerAdd }/>), 'add')) }>
